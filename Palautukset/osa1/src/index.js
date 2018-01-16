@@ -4,35 +4,39 @@ import ReactDOM from 'react-dom'
 
 const App = () => {
     const kurssi = 'Half Stack -sovelluskehitys'
-    const Otsikko = () => {
+    const Otsikko = (props) => {
         return (
-            <h1>{kurssi}</h1>
+            <h1>{props.kurssi}</h1>
         )
     }
-      const osa1 = {
-          nimi: 'Reactin perusteet',
-          tehtavia: 10
-      }
-      const osa2 = {
-          nimi: 'Tiedonvälitys propseilla',
-          tehtavia: 7
-      }
-      const osa3 = {
-          nimi: 'Komponenttien tila',
-          tehtavia: 14
-      }
-    console.log(osa1,osa2,osa3);
+    const osat = [
+        {
+            nimi: 'Reactin perusteet',
+            tehtavia: 10,
+        },
+        {
+            nimi: 'Tiedonvälitys propseilla',
+            tehtavia: 7
+        },
+        {
+            nimi: 'Komponenttien tila',
+            tehtavia: 14
+        }
+    ]
+    
+    console.log(osat);
     const Osa = (props) => {
         return (<div>
             <p>{props.osa} {props.tehtavia}</p>
         </div>)
     }
-    const Sisalto = () => {
+    const Sisalto = (props) => {
+        console.log(props)
         return (
             <div>
-            <Osa osa={osa1.nimi} tehtavia={osa1.tehtavia} />
-            <Osa osa={osa2.nimi} tehtavia={osa2.tehtavia} />
-            <Osa osa={osa3.nimi} tehtavia={osa3.tehtavia} />
+            <Osa osa={props.osat[0].nimi} tehtavia={props.osat[0].tehtavia} />
+            <Osa osa={props.osat[1].nimi} tehtavia={props.osat[1].tehtavia} />
+            <Osa osa={props.osat[2].nimi} tehtavia={props.osat[2].tehtavia} />
             </div>
         )
     }
@@ -40,7 +44,7 @@ const App = () => {
     const Yhteensa = () => {
         return (
             <div>
-                 <p>yhteensä {osa1.tehtavia + osa2.tehtavia + osa3.tehtavia} tehtävää</p>
+                 <p>yhteensä {osat[0].tehtavia + osat[1].tehtavia + osat[2].tehtavia} tehtävää</p>
             </div>
         )
     }
@@ -48,8 +52,8 @@ const App = () => {
     return (
         <div>
             <Otsikko kurssi={kurssi}/>
-            <Sisalto/>
-            <Yhteensa />
+            <Sisalto osat={osat}/>
+            <Yhteensa osat={osat} />
         </div>
     )
 }
