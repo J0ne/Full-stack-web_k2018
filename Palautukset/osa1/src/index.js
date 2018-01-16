@@ -9,12 +9,19 @@ const App = () => {
             <h1>{kurssi}</h1>
         )
     }
-    const osa1 = 'Reactin perusteet'
-    const tehtavia1 = 10
-    const osa2 = 'Tiedonvälitys propseilla'
-    const tehtavia2 = 7
-    const osa3 = 'Komponenttien tila'
-    
+      const osa1 = {
+          nimi: 'Reactin perusteet',
+          tehtavia: 10
+      }
+      const osa2 = {
+          nimi: 'Tiedonvälitys propseilla',
+          tehtavia: 7
+      }
+      const osa3 = {
+          nimi: 'Komponenttien tila',
+          tehtavia: 14
+      }
+    console.log(osa1,osa2,osa3);
     const Osa = (props) => {
         return (<div>
             <p>{props.osa} {props.tehtavia}</p>
@@ -23,18 +30,17 @@ const App = () => {
     const Sisalto = () => {
         return (
             <div>
-            <Osa osa={osa1} tehtavia={tehtavia1} />
-            <Osa osa={osa2} tehtavia={tehtavia2} />
-            <Osa osa={osa3} tehtavia={tehtavia3} />
+            <Osa osa={osa1.nimi} tehtavia={osa1.tehtavia} />
+            <Osa osa={osa2.nimi} tehtavia={osa2.tehtavia} />
+            <Osa osa={osa3.nimi} tehtavia={osa3.tehtavia} />
             </div>
         )
     }
-    const tehtavia3 = 14
 
     const Yhteensa = () => {
         return (
             <div>
-                 <p>yhteensä {tehtavia1 + tehtavia2 + tehtavia3} tehtävää</p>
+                 <p>yhteensä {osa1.tehtavia + osa2.tehtavia + osa3.tehtavia} tehtävää</p>
             </div>
         )
     }
