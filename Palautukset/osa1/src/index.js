@@ -3,35 +3,34 @@ import ReactDOM from 'react-dom'
 
 
 const App = () => {
-    const kurssi = 'Half Stack -sovelluskehitys'
+    const kurssi = {
+        nimi: 'Half Stack -sovelluskehitys',
+        osat: [
+            {
+                nimi: 'Reactin perusteet',
+                tehtavia: 10
+            },
+            {
+                nimi: 'Tiedonvälitys propseilla',
+                tehtavia: 7
+            },
+            {
+                nimi: 'Komponenttien tila',
+                tehtavia: 14
+            }
+        ]
+    }
     const Otsikko = (props) => {
         return (
-            <h1>{props.kurssi}</h1>
+            <h1>{props.kurssi.nimi}</h1>
         )
     }
-    const osat = [
-        {
-            nimi: 'Reactin perusteet',
-            tehtavia: 10,
-        },
-        {
-            nimi: 'Tiedonvälitys propseilla',
-            tehtavia: 7
-        },
-        {
-            nimi: 'Komponenttien tila',
-            tehtavia: 14
-        }
-    ]
-    
-    console.log(osat);
     const Osa = (props) => {
         return (<div>
             <p>{props.osa} {props.tehtavia}</p>
         </div>)
     }
     const Sisalto = (props) => {
-        console.log(props)
         return (
             <div>
             <Osa osa={props.osat[0].nimi} tehtavia={props.osat[0].tehtavia} />
@@ -41,10 +40,10 @@ const App = () => {
         )
     }
 
-    const Yhteensa = () => {
+    const Yhteensa = (props) => {
         return (
             <div>
-                 <p>yhteensä {osat[0].tehtavia + osat[1].tehtavia + osat[2].tehtavia} tehtävää</p>
+                 <p>yhteensä {props.osat[0].tehtavia + props.osat[1].tehtavia + props.osat[2].tehtavia} tehtävää</p>
             </div>
         )
     }
@@ -52,8 +51,8 @@ const App = () => {
     return (
         <div>
             <Otsikko kurssi={kurssi}/>
-            <Sisalto osat={osat}/>
-            <Yhteensa osat={osat} />
+            <Sisalto osat={kurssi.osat}/>
+            <Yhteensa osat={kurssi.osat} />
         </div>
     )
 }
