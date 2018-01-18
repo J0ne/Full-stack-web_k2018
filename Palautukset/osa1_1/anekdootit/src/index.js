@@ -26,6 +26,21 @@ class App extends React.Component {
         let votes = this.state.votes;
         return votes[index];
     }
+    annaVoittaja = () => {
+        let voittajaIndex = 0; 
+        let korkein = 0;
+        this.state.votes.forEach(function(item, index, array){
+            if(item > korkein){
+                korkein = item;
+                voittajaIndex = index;
+            }
+        })
+        if(korkein > 0 ){
+            return this.props.anecdotes[voittajaIndex];
+        }else{
+            return "No winner yet"
+        }
+    }
     render() {
         return (
             <div>
@@ -34,8 +49,11 @@ class App extends React.Component {
                 <div>
                     <button onClick={this.annaAani}>Vote!</button> 
                     <button onClick={this.annaAnekdootti} >Next anecdote!</button></div>
+                <h3>anecdote with most votes:</h3>
+                <p>{this.annaVoittaja()}</p>
             </div>
         )
+        
     }
 }
 
