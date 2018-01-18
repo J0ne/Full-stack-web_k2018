@@ -10,22 +10,27 @@ class App extends React.Component {
         }
     }
 
-    annaAnekdootti = () =>{
+    annaAnekdootti = (props) =>{
         const max = this.props.anecdotes.length;
         let ind  = Math.floor((Math.random() * max))
         this.setState({ selected: ind});
     }
-    annaAani = (props) => {
+    annaAani = () => {
         let index = this.state.selected;
         let votes = this.state.votes;
         votes[index]++;
-
         this.setState({votes});
+    }
+    annaTilanne = () => {
+        let index = this.state.selected;
+        let votes = this.state.votes;
+        return votes[index];
     }
     render() {
         return (
-            <div><h3>{this.props.anecdotes[this.state.selected]}</h3>
-            
+            <div>
+                <h3>{this.props.anecdotes[this.state.selected]}</h3>
+                <p>has {this.annaTilanne()} votes</p>
                 <div>
                     <button onClick={this.annaAani}>Vote!</button> 
                     <button onClick={this.annaAnekdootti} >Next anecdote!</button></div>
