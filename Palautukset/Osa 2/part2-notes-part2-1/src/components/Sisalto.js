@@ -6,7 +6,7 @@ const Sisalto = ({ osat }) => {
     <Osa key={x.id} nimi={x.nimi} tehtavia={x.tehtavia}/>
     )
   return (
-    <ul>{nimet}</ul>
+    <div>{nimet}</div>
   )
 }
 
