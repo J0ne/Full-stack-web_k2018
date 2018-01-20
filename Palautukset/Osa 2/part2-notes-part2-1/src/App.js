@@ -1,13 +1,31 @@
 import React from 'react'
-import Note from './components/Note'
+import Kurssi from './components/Kurssi'
 
-const App = ({ notes }) => {
+const App = () => {
+  const kurssi = {
+    nimi: 'Half Stack -sovelluskehitys',
+    osat: [
+      {
+        nimi: 'Reactin perusteet',
+        tehtavia: 10,
+        id: 1
+      },
+      {
+        nimi: 'Tiedonvälitys propseilla',
+        tehtavia: 7,
+        id: 2
+      },
+      {
+        nimi: 'Komponenttien tila',
+        tehtavia: 14,
+        id: 3
+      }
+    ]
+  }
+
   return (
     <div>
-      <h1>Muistiinpanot</h1>
-      <ul>
-        {notes.map(note => <Note key={note.id} note={note} />)}
-      </ul>
+      <Kurssi kurssi={kurssi} />
     </div>
   )
 }
