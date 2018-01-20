@@ -3,12 +3,12 @@ import Sisalto from './Sisalto'
 import Otsikko from './Otsikko'
 import Yhteensa from './Yhteensa'
 
-const Kurssi = ({ kurssi }) => {
+const Kurssi = ({ nimi, osat }) => {
     return (
         <div>
-            <Otsikko otsikko={kurssi.nimi}/>
-            <Sisalto osat={kurssi.osat} />
-            <Yhteensa osat={kurssi.osat} />
+            <Otsikko otsikko={nimi}/>
+            <Sisalto osat={osat} />
+            <Yhteensa osat={osat} />
         </div>
 
     )
