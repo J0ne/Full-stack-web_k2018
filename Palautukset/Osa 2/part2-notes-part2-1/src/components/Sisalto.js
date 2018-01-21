@@ -2,7 +2,6 @@ import React from 'react'
 import Osa from './Osa'
 
 const Sisalto = ({ osat }) => {
-  console.log(osat);
   const nimet = osat.map(x => 
     <Osa key={x.id} nimi={x.nimi} tehtavia={x.tehtavia}/>
     )
