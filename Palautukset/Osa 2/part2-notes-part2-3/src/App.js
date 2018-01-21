@@ -24,7 +24,13 @@ class App extends React.Component {
       // important: Math.random() > 0.5,
       id: this.state.persons.length + 1
     }
+    const isAlready = this.state.persons.map( x=> x.name)
+      .indexOf(this.state.newPerson) > -1
 
+    if(isAlready) { 
+      alert('Henkilö ' +this.state.newPerson + ' on jo listassa')
+      return 
+    }
     const persons = this.state.persons.concat(personObj)
 
     this.setState({
