@@ -9,7 +9,7 @@ class App extends React.Component {
       persons: props.persons,
       newPerson: '',
       newNumber: '',
-      showAll: true
+      filter: ''
     }
   }
 
@@ -51,18 +51,29 @@ class App extends React.Component {
     console.log(event.target.value)
     this.setState({ newNumber: event.target.value })
   }
+  upDateList = (event) => {
+    console.log(event.target.value)
+    this.setState({ filter: event.target.value })
+  }
 
   render() {
-    const personsToShow = this.state.persons
-      // this.state.showAll ?
-      //   this.state.persons :
-      //   this.state.persons.filter(note => true)
+    const personsToShow = 
+      this.state.filter.length == 0 ?
+        this.state.persons :
+        this.state.persons.filter(p => p.name.toUpperCase().includes(this.state.filter.toUpperCase()))
 
     const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
 
     return (
       <div>
         <h1>Puhelinluettelo</h1>
+        <div>
+          Rajaa näytettäviä: <input
+            value={this.state.filter}
+            onChange={this.upDateList}
+          />
+        </div>
+        <br/>
          <form onSubmit={this.addPerson}>
          <div>
             Nimi: <input
