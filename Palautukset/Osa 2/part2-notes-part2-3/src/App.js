@@ -2,13 +2,14 @@ import React from 'react'
 import Filter from './components/Filter'
 import Form from './components/Form'
 import Numbers from './components/Numbers'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     console.log(props.persons)
     this.state = {
-      persons: props.persons,
+      persons: [],
       newPerson: '',
       newNumber: '',
       filter: ''
@@ -58,17 +59,27 @@ class App extends React.Component {
     this.setState({ filter: event.target.value })
   }
 
+  componentWillMount() {
+    console.log('will mount')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log(response.data)
+        this.setState({ persons: response.data })
+      })
+  }
+
   render() {
     const personsToShow = 
-      this.state.filter.length == 0 ?
+      this.state.filter.length === 0 ?
         this.state.persons :
         this.state.persons.filter(p => p.name.toUpperCase().includes(this.state.filter.toUpperCase()))
 
-    const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
+    //const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
 
     return (
       <div>
-        <h1>Puhelinluettelo</h1>
+        <h1>Puhelinluettelo *</h1>
         <Filter filter={this.state.filter} handler={this.upDateList}/>
         {/* submitAction, newPerson, personHandler, newNumber, numberHandler */}
         <Form submitAction={this.addPerson} newPerson={this.state.newPerson}

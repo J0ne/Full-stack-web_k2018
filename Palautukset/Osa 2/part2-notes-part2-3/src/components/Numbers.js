@@ -6,7 +6,7 @@ const Numbers = ({personsToShow}) => {
         <div>
             <h2>Numerot</h2>
             <ul>
-                {personsToShow.map(person => <Person key={person.id} name={person.name} number={person.number} />)}
+                {personsToShow.map(person => <Person key={person.name} name={person.name} number={person.number} />)}
             </ul>
         </div>
 
