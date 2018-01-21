@@ -1,5 +1,7 @@
 import React from 'react'
-import Person from './components/Person'
+import Filter from './components/Filter'
+import Form from './components/Form'
+import Numbers from './components/Numbers'
 
 class App extends React.Component {
   constructor(props) {
@@ -67,38 +69,13 @@ class App extends React.Component {
     return (
       <div>
         <h1>Puhelinluettelo</h1>
-        <div>
-          Rajaa näytettäviä: <input
-            value={this.state.filter}
-            onChange={this.upDateList}
-          />
-        </div>
-        <br/>
-         <form onSubmit={this.addPerson}>
-         <div>
-            Nimi: <input
-              value={this.state.newPerson}
-              onChange={this.handleNameChange}
-            />
-         </div>
-         <div>
-            Numero: <input
-              value={this.state.newNumber}
-              onChange={this.handleNumberChange}
-            />
-         </div>
-          <button type="submit">lisää</button>
-        </form>
-        <div>
-          {/* <button onClick={this.toggleVisible}>
-            näytä {label}
-          </button> */}
-        </div>
-        <h2>Numerot</h2>
-        <ul>
-          {personsToShow.map(person => <Person key={person.id} name={person.name} number={person.number} />)}
-        </ul>
-       
+        <Filter filter={this.state.filter} handler={this.upDateList}/>
+        {/* submitAction, newPerson, personHandler, newNumber, numberHandler */}
+        <Form submitAction={this.addPerson} newPerson={this.state.newPerson}
+          personHandler={this.handleNameChange} newNumber={this.state.newNumber}
+          numberHandler={this.handleNumberChange}/>
+        <Numbers personsToShow={personsToShow} />
+      
       </div>
     )
   }
