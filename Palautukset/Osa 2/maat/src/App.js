@@ -36,15 +36,12 @@ class App extends React.Component {
       return;
     }
     // resultCount = 1
-    const tmp = this.state.countries.find(p => p.name.toUpperCase().includes(filterString))
-    if(tmp === undefined){
+    const country = this.state.countries.find(p => p.name.toUpperCase().includes(filterString))
+    if (country === undefined){
       this.countriesToShow = [];
       return;
     }
-    this.setState({ selectedCountry: {
-      name: tmp.name,
-      flag: tmp.flag
-    }});
+    this.setState({ selectedCountry: country});
     return;
 
   }
@@ -70,6 +67,9 @@ class App extends React.Component {
     let element = null;
     if (this.state.selectedCountry != null) {
       element = <div><h3>{this.state.selectedCountry.name}</h3>
+          <p>capital: {this.state.selectedCountry.capital}</p>
+          <p>population: {this.state.selectedCountry.population}</p>
+          <br/>
         <img src={this.state.selectedCountry.flag} alt="Loading image..." width="30%"></img> </div>
     } else {
       element = <ul >
