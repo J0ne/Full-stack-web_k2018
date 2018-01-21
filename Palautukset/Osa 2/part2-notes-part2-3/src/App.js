@@ -8,6 +8,7 @@ class App extends React.Component {
     this.state = {
       persons: props.persons,
       newPerson: '',
+      newNumber: '',
       showAll: true
     }
   }
@@ -20,6 +21,7 @@ class App extends React.Component {
     event.preventDefault()
     const personObj = {
       name: this.state.newPerson,
+      number: this.state.newNumber,
       // date: new Date().new,
       // important: Math.random() > 0.5,
       id: this.state.persons.length + 1
@@ -35,14 +37,19 @@ class App extends React.Component {
 
     this.setState({
       persons,
-      newPerson: ''
+      newPerson: '',
+      newNumber: ''
     })
     console.log('Hlö lisätty: ', personObj, persons)
   }
 
-  handleNoteChange = (event) => {
+  handleNameChange = (event) => {
     console.log(event.target.value)
     this.setState({ newPerson: event.target.value })
+  }
+  handleNumberChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ newNumber: event.target.value })
   }
 
   render() {
@@ -57,10 +64,18 @@ class App extends React.Component {
       <div>
         <h1>Puhelinluettelo</h1>
          <form onSubmit={this.addPerson}>
-          <input 
-            value={this.state.newPerson} 
-            onChange={this.handleNoteChange}
-          />
+         <div>
+            Nimi: <input
+              value={this.state.newPerson}
+              onChange={this.handleNameChange}
+            />
+         </div>
+         <div>
+            Numero: <input
+              value={this.state.newNumber}
+              onChange={this.handleNumberChange}
+            />
+         </div>
           <button type="submit">lisää</button>
         </form>
         <div>
@@ -70,7 +85,7 @@ class App extends React.Component {
         </div>
         <h2>Numerot</h2>
         <ul>
-          {personsToShow.map(person => <Person key={person.id} name={person.name} />)}
+          {personsToShow.map(person => <Person key={person.id} name={person.name} number={person.number} />)}
         </ul>
        
       </div>
