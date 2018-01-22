@@ -10,7 +10,7 @@ class App extends React.Component {
       selectedCountry: null
     }
   }
-
+  resultCount = (filterString) => this.state.countries.filter(p => p.name.toUpperCase().includes(filterString)).length;
   toggleVisible = () => {
     this.setState({ showAll: !this.state.showAll })
   }
@@ -18,19 +18,18 @@ class App extends React.Component {
   upDateList = (event) => {
     const filterString = event.target.value.toUpperCase();
     this.setState({ selectedCountry: null })
-    let resultCount = this.state.countries.filter(p => p.name.toUpperCase().includes(filterString)).length;
-
-    if (event.target.value.length === 0) {
+    const resultLength = this.resultCount(filterString)
+    if (filterString === 0) {
       this.infoText = '';
       this.countriesToShow = []
       return;
     };
-    if (resultCount > 10) {
-      this.infoText = 'Too many matches (' + resultCount + '), specify another filter';
+    if (resultLength > 10) {
+      this.infoText = 'Too many matches (' + resultLength + '), specify another filter';
       this.countriesToShow = [];
       return;
     }
-    if(resultCount > 1){
+    if (resultLength > 1){
       this.infoText = '';
       this.countriesToShow = this.state.countries.filter(p => p.name.toUpperCase().includes(filterString));
       return;
@@ -51,17 +50,11 @@ class App extends React.Component {
     axios
       .get('https://restcountries.eu/rest/v2/all')
       .then(response => {
-        console.log(response.data)
         this.setState({ countries: response.data })
       })
   }
   infoText = '';
-
   countriesToShow = [];
-  countryFilter = () => {
-    console.log(this.state.filter.length);
-    
-  }
   render() {
     //const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
     let element = null;
@@ -70,7 +63,7 @@ class App extends React.Component {
           <p>capital: {this.state.selectedCountry.capital}</p>
           <p>population: {this.state.selectedCountry.population}</p>
           <br/>
-        <img src={this.state.selectedCountry.flag} alt="Loading image..." width="30%"></img> </div>
+        <img src={this.state.selectedCountry.flag} alt="Loading..." width="30%"></img> </div>
     } else {
       element = <ul >
         {this.countriesToShow.map(c => <li key={c.name}>{c.name}</li>)}
