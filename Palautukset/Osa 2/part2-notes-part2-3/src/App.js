@@ -2,7 +2,8 @@ import React from 'react'
 import Filter from './components/Filter'
 import Form from './components/Form'
 import Numbers from './components/Numbers'
-import axios from 'axios'
+//import axios from 'axios'
+import personService from './services/persons'
 
 class App extends React.Component {
   constructor(props) {
@@ -20,36 +21,6 @@ class App extends React.Component {
     this.setState({ showAll: !this.state.showAll })
   }
 
-  addPerson = (event) => {
-    event.preventDefault()
-    const personObj = {
-      name: this.state.newPerson,
-      number: this.state.newNumber,
-      // date: new Date().new,
-      // important: Math.random() > 0.5,
-      id: this.state.persons.length + 1
-    }
-    const isAlready = this.state.persons.map( x=> x.name)
-      .indexOf(this.state.newPerson) > -1
-
-    if(isAlready) { 
-      alert('Henkilö ' +this.state.newPerson + ' on jo listassa')
-      return 
-    }
-    const persons = this.state.persons.concat(personObj)
-
-    this.setState({
-      persons,
-      newPerson: '',
-      newNumber: ''
-    })
-    
-    axios.post('http://localhost:3001/persons', personObj)
-      .then(response => {
-        console.log(response)
-      })
-    console.log('Hlö lisätty: ', personObj, persons)
-  }
 
   handleNameChange = (event) => {
     console.log(event.target.value)
@@ -65,12 +36,39 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    console.log('will mount')
-    axios
-      .get('http://localhost:3001/persons')
+    personService.getAll().then( persons =>
+      this.setState({ persons })
+    )
+  }
+  addPerson = (event) => {
+    event.preventDefault()
+    const personObj = {
+      name: this.state.newPerson,
+      number: this.state.newNumber,
+      id: this.state.persons.length + 1
+    }
+    const isAlready = this.state.persons.map(x => x.name)
+      .indexOf(this.state.newPerson) > -1
+
+    if (isAlready) {
+      alert('Henkilö ' + this.state.newPerson + ' on jo listassa')
+      return
+    }
+    const persons = this.state.persons.concat(personObj)
+
+    this.setState({
+      persons,
+      newPerson: '',
+      newNumber: ''
+    })
+
+    personService
+      .create(personObj)
       .then(response => {
-        console.log(response.data)
-        this.setState({ persons: response.data })
+        this.setState({
+          persons: this.state.notes.concat(response.data),
+          newPerson: ''
+        })
       })
   }
 
