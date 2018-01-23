@@ -66,29 +66,43 @@ class App extends React.Component {
       .create(personObj)
       .then(response => {
         this.setState({
-          persons: this.state.notes.concat(response.data),
+          persons: this.state.persons.concat(response.data),
           newPerson: ''
         })
       })
   }
+  deletePerson = (id) => {
+    return () => 
+    {
+      var result = window.confirm("Poistetaanko " + this.state.persons
+        .find(p => p.id === id).name)
 
+      if (!result) { 
+        // ei poisteta
+        return
+       }
+      personService.deletePerson(id).then(persons =>
+        this.setState({ persons })
+      )
+    }
+
+  }
   render() {
     const personsToShow = 
       this.state.filter.length === 0 ?
         this.state.persons :
         this.state.persons.filter(p => p.name.toUpperCase().includes(this.state.filter.toUpperCase()))
-
     //const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
 
     return (
       <div>
-        <h1>Puhelinluettelo *</h1>
+        <h1>Puhelinluettelo</h1>
         <Filter filter={this.state.filter} handler={this.upDateList}/>
         {/* submitAction, newPerson, personHandler, newNumber, numberHandler */}
         <Form submitAction={this.addPerson} newPerson={this.state.newPerson}
           personHandler={this.handleNameChange} newNumber={this.state.newNumber}
           numberHandler={this.handleNumberChange}/>
-        <Numbers personsToShow={personsToShow} />
+        <Numbers personsToShow={personsToShow} deletePerson={this.deletePerson}/>
       
       </div>
     )
