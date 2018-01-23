@@ -43,6 +43,11 @@ class App extends React.Component {
       newPerson: '',
       newNumber: ''
     })
+    
+    axios.post('http://localhost:3001/persons', personObj)
+      .then(response => {
+        console.log(response)
+      })
     console.log('Hlö lisätty: ', personObj, persons)
   }
 
