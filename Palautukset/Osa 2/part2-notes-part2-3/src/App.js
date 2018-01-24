@@ -6,9 +6,8 @@ import Numbers from './components/Numbers'
 import personService from './services/persons'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    console.log(props.persons)
+  constructor() {
+    super()
     this.state = {
       persons: [],
       newPerson: '',
@@ -40,19 +39,38 @@ class App extends React.Component {
       this.setState({ persons })
     )
   }
+
+  generateId(){
+    let id = Math.max.apply(Math, this.state.persons.map( o => o.id )) +1;
+    console.log(id);
+    return id;
+  }
   addPerson = (event) => {
     event.preventDefault()
     const personObj = {
       name: this.state.newPerson,
-      number: this.state.newNumber,
-      id: this.state.persons.length + 1
+      number: this.state.newNumber
     }
-    const isAlready = this.state.persons.map(x => x.name)
-      .indexOf(this.state.newPerson) > -1
+    const personIndex = this.state.persons.map(x => x.name)
+      .indexOf(this.state.newPerson);
 
-    if (isAlready) {
-      alert('Henkilö ' + this.state.newPerson + ' on jo listassa')
-      return
+    if (personIndex > -1) {
+      let personToUpdate = this.state.persons[personIndex];
+
+      let result = window.confirm(personToUpdate.name + ' on jo luettelossa. Korvataanko vanha numero uudella?');
+      if(!result) {
+        return;
+      }else{
+        personService.update(personToUpdate.id, personObj)
+        .then(persons => {
+          this.setState({
+            persons: persons,
+            newPerson: '',
+            newNumber: ''
+          })
+        });
+        return;
+      }
     }
     const persons = this.state.persons.concat(personObj)
 
@@ -61,20 +79,22 @@ class App extends React.Component {
       newPerson: '',
       newNumber: ''
     })
-
+    personObj.id = this.generateId();
     personService
       .create(personObj)
-      .then(response => {
+      .then(persons => {
+        console.log(persons)
         this.setState({
-          persons: this.state.persons.concat(response.data),
-          newPerson: ''
+          persons: persons,
+          newPerson: '',
+          newNumber: ''
         })
       })
   }
   deletePerson = (id) => {
     return () => 
     {
-      var result = window.confirm("Poistetaanko " + this.state.persons
+      let result = window.confirm("Poistetaanko " + this.state.persons
         .find(p => p.id === id).name)
 
       if (!result) { 
@@ -102,7 +122,7 @@ class App extends React.Component {
         <Form submitAction={this.addPerson} newPerson={this.state.newPerson}
           personHandler={this.handleNameChange} newNumber={this.state.newNumber}
           numberHandler={this.handleNumberChange}/>
-        <Numbers personsToShow={personsToShow} deletePerson={this.deletePerson}/>
+        <Numbers persons={personsToShow} deletePerson={this.deletePerson}/>
       
       </div>
     )
