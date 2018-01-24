@@ -1,0 +1,18 @@
+.container{
+    background-color: aliceblue;
+    width: 40%;
+    height: auto;
+    border: 1px solid lightblue;
+    padding: 30px;
+}
+.info{   
+background-color: rgb(187, 250, 171);
+background-color: #bdf1c1;
+color: darkgreen;
+border: 1px solid cyan;
+border-radius: 5px;
+width: auto;
+height: 2em;
+font-weight: bolder;
+padding: 14px 15px 4px 15px;
+}
