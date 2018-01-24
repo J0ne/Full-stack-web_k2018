@@ -2,6 +2,7 @@ import React from 'react'
 import Filter from './components/Filter'
 import Form from './components/Form'
 import Numbers from './components/Numbers'
+import Notification from './components/Notification'
 //import axios from 'axios'
 import personService from './services/persons'
 
@@ -12,10 +13,10 @@ class App extends React.Component {
       persons: [],
       newPerson: '',
       newNumber: '',
-      filter: ''
+      filter: '',
+      infoText: null
     }
   }
-
   toggleVisible = () => {
     this.setState({ showAll: !this.state.showAll })
   }
@@ -67,7 +68,8 @@ class App extends React.Component {
             persons: persons,
             newPerson: '',
             newNumber: ''
-          })
+          });
+          this.showInfo('Henkilön ' + personObj.name + ' numero päivitetty!');
         });
         return;
       }
@@ -83,30 +85,44 @@ class App extends React.Component {
     personService
       .create(personObj)
       .then(persons => {
-        console.log(persons)
         this.setState({
           persons: persons,
           newPerson: '',
           newNumber: ''
         })
+        this.showInfo('Henkilö ' + personObj.name + ' lisätty!');
       })
   }
   deletePerson = (id) => {
     return () => 
     {
-      let result = window.confirm("Poistetaanko " + this.state.persons
-        .find(p => p.id === id).name)
+      let person = this.state.persons
+        .find(p => p.id === id).name;
+      let result = window.confirm("Poistetaanko " + person);
 
       if (!result) { 
         // ei poisteta
         return
        }
       personService.deletePerson(id).then(persons =>
-        this.setState({ persons })
+        {
+          this.setState({ persons });
+           this.showInfo(person +' poistettu!');
+        }
       )
     }
 
   }
+
+  showInfo(message){
+    this.setState({
+      infoText: message
+    })
+    setTimeout(() => {
+      this.setState({ infoText: null })
+    }, 4000)
+  }
+
   render() {
     const personsToShow = 
       this.state.filter.length === 0 ?
@@ -115,7 +131,8 @@ class App extends React.Component {
     //const label = this.state.showAll ? 'vain tärkeät' : 'kaikki'
 
     return (
-      <div>
+      <div className="container">
+        <Notification message={this.state.infoText} />
         <h1>Puhelinluettelo</h1>
         <Filter filter={this.state.filter} handler={this.upDateList}/>
         {/* submitAction, newPerson, personHandler, newNumber, numberHandler */}
