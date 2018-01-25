@@ -21,9 +21,14 @@
       "id": 4
     },
     {
+      "name": "Uusi hlö",
+      "number": "543234",
+      "id": 7
+    },
+    {
       "name": "Matti Möttönen",
-      "number": "666777",
-      "id": 5
+      "number": "6543",
+      "id": 8
     }
   ]
 }

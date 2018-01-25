@@ -37,8 +37,9 @@ class App extends React.Component {
 
   componentWillMount() {
     personService.getAll().then( persons =>
-      this.setState({ persons })
-    )
+      this.setState({ persons }))
+      .catch(err =>
+        alert(err))
   }
 
   generateId(){
@@ -68,9 +69,10 @@ class App extends React.Component {
             persons: persons,
             newPerson: '',
             newNumber: ''
-          });
+          })})
+          .catch(err => this.showInfo('Päivitys ei onnistunut. Virhe: ' + err));
+
           this.showInfo('Henkilön ' + personObj.name + ' numero päivitetty!');
-        });
         return;
       }
     }
@@ -91,7 +93,7 @@ class App extends React.Component {
           newNumber: ''
         })
         this.showInfo('Henkilö ' + personObj.name + ' lisätty!');
-      })
+      }).catch(err => this.showInfo('Lisäys ei onnistunut. Virhe: ' + err));
   }
   deletePerson = (id) => {
     return () => 
@@ -109,7 +111,7 @@ class App extends React.Component {
           this.setState({ persons });
            this.showInfo(person +' poistettu!');
         }
-      )
+      ).catch(err => this.showInfo('Poisto ei onnistunut. Virhe: ' + err));
     }
 
   }
@@ -136,10 +138,16 @@ class App extends React.Component {
         <h1>Puhelinluettelo</h1>
         <Filter filter={this.state.filter} handler={this.upDateList}/>
         {/* submitAction, newPerson, personHandler, newNumber, numberHandler */}
-        <Form submitAction={this.addPerson} newPerson={this.state.newPerson}
-          personHandler={this.handleNameChange} newNumber={this.state.newNumber}
-          numberHandler={this.handleNumberChange}/>
-        <Numbers persons={personsToShow} deletePerson={this.deletePerson}/>
+        <Form
+          submitAction={this.addPerson}
+          newPerson={this.state.newPerson}
+          personHandler={this.handleNameChange}
+          newNumber={this.state.newNumber}
+          numberHandler={this.handleNumberChange}
+        />
+
+        <Numbers persons={personsToShow}
+        deletePerson={this.deletePerson}/>
       
       </div>
     )

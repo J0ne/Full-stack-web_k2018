@@ -13,7 +13,11 @@ const create = (newObject) => {
 
 const update = (id, newObject) => {
     const request = axios.put(`${baseUrl}/${id}`, newObject)
-    return request.then(() => getAll())
+    return request.then(() =>
+        // catchin testausta esim: 
+        //throw "Update ei onnistunut"
+        getAll()
+)
 }
 
 const deletePerson = (id) => {
