@@ -1,1 +1,2 @@
-Testiä...
+5.2. 3h käytetty
+- aluksi refaktoroin mallia, mutta tein sitten ekat tehtävät vielä alusta uudelleen
