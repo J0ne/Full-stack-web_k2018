@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const middleware = require('./utils/middleware')
-const notesRouter = require('./controllers/notes')
+const blogsRouter = require('./controllers/blogs')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.use(express.static('build'))
 app.use(middleware.logger)
 
-app.use('/api/notes', notesRouter)
+app.use('/api/blogs', blogsRouter)
 
 app.use(middleware.error)
 

@@ -1,5 +1,5 @@
 {
-  "name": "notebackend",
+  "name": "blogbackend",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "watch": "node_modules/.bin/nodemon index.js",
     "lint": "node_modules/.bin/eslint ."
   },
-  "author": "Matti Luukkainen",
+  "author": "Jouni Männistö",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.4",

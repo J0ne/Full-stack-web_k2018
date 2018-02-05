@@ -1,0 +1,16 @@
+POST http://localhost:3001/api/blogs
+content-type: application/json
+
+{
+  "title": "Sparkfun - START SOMETHING",
+  "author": "Feldi",
+  "url": "https://www.sparkfun.com/news/2597",
+  "likes": 0
+}
+
+# {
+#   "title": "Learn to code",
+#   "author": "Marius Schultz",
+#   "url": "https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth",
+#   "likes": 5
+# }

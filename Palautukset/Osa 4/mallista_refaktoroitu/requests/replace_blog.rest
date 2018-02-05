@@ -1,0 +1,9 @@
+PUT http://localhost:3001/api/blogs/5a7899e5d27bbf0b994ea865
+content-type: application/json
+
+  {
+  "title": "Learn to code",
+  "author": "Marius Schultz",
+  "url": "https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth",
+  "likes": 123
+  }
