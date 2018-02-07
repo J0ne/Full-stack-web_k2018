@@ -1,2 +1,6 @@
-5.2. 3h käytetty
-- aluksi refaktoroin mallia, mutta tein sitten ekat tehtävät vielä alusta uudelleen
+5.2.
+- aluksi refaktoroin mallia, 
+mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
+
+- 6.2. osan 4 lukemista: 0.5h
+- 7.2. tehtäviä/jest-asennus 1h
