@@ -6,3 +6,11 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 - 7.2. tehtäviä/jest-asennus 1h
 
 - 8.2. 1,5h
+
+
+
+
+HUOM! TEE NÄMÄ LOPUKSI
+4.6* apufunktioita ja yksikkötestejä, osa 4
+4.7* apufunktioita ja yksikkötestejä, osa 5
+
