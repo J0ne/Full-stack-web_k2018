@@ -6,7 +6,8 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 - 7.2. tehtäviä/jest-asennus 1h
 
 - 8.2. 1,5h
-
+-11.2. 1h konfigurointia ja matskun lukemista
+-12.2. 2.5h apin testit
 
 
 
