@@ -13,12 +13,20 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 blogsRouter.post('/', async (request, response) => {
-    const blog = new Blog(request.body)
-    
-    const likes = blog.likes ? blog.likes : 0
-    blog.likes = likes
-    const result = await blog.save()
-    response.status(201).json(result)
+    try {
+        const blog = new Blog(request.body)
+        if (!blog.url || !blog.title) {
+            return response.status(400).json({ error: 'url or title missing' }).end()
+        }
+        const likes = blog.likes ? blog.likes : 0
+        blog.likes = likes
+        const result = await blog.save()
+        response.status(201).json(result)
+    } catch (error) {
+        console.log(error)
+        response.status(500).json({ error: 'something went wrong...' })
+    }
+
 })
 
 const formatBlog = (blog) => {

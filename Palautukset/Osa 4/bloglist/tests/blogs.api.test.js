@@ -37,6 +37,23 @@ test('blog likes initialised', async () => {
     console.log(result.body)    
     expect(result.body.likes).toBe(0)
 })
+test('blog title and url required', async () => {
+    const testBlog = {
+        "author": "API TEST"
+    }
+    const result = await api
+        .post('/api/blogs').send(testBlog)
+        .expect(400)
+
+    // toinen puuttuu    
+    const testBlog2 = {
+        "author": "API TEST2",
+        "title": "Test blog"
+    }
+    const result2 = await api
+        .post('/api/blogs').send(testBlog2)
+        .expect(400)
+})
 
 afterAll(() => {
     server.close()
