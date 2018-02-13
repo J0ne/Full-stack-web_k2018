@@ -10,6 +10,20 @@ test('blogs are returned as json', async () => {
         .expect('Content-Type', /application\/json/)
 })
 
+
+test('blog is saved', async () => {
+    const testBlog = {
+        "title": "Test Blog",
+        "author": "API TEST",
+        "url": "https://www.example.com/",
+        "likes": 100
+    }
+    await api
+        .post('/api/blogs').send(testBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+})
+
 afterAll(() => {
     server.close()
 })
