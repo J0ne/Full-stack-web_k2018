@@ -7,9 +7,16 @@ blogsRouter.get('/', async (request, response) => {
     response.json(blogs.map(formatBlog))
 })
 
+blogsRouter.get('/:id', async (request, response) => {
+    const blog = await Blog.findById(request.params.id)
+    response.json(formatBlog(blog))
+})
+
 blogsRouter.post('/', async (request, response) => {
     const blog = new Blog(request.body)
-    console.log(blog)
+    
+    const likes = blog.likes ? blog.likes : 0
+    blog.likes = likes
     const result = await blog.save()
     response.status(201).json(result)
 })

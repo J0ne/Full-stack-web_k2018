@@ -24,6 +24,20 @@ test('blog is saved', async () => {
         .expect('Content-Type', /application\/json/)
 })
 
+test('blog likes initialised', async () => {
+    const testBlog = {
+        "title": "Test Blog",
+        "author": "API TEST",
+        "url": "https://www.example.com/"
+    }
+    const result = await api
+        .post('/api/blogs').send(testBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+    console.log(result.body)    
+    expect(result.body.likes).toBe(0)
+})
+
 afterAll(() => {
     server.close()
 })
