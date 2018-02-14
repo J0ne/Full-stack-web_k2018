@@ -49,7 +49,6 @@ describe('favorite blog', () =>{
 
     test('gives the most liked blog', () => {
         const result = listHelper.favoriteBlog(testBlogList)
-        console.log(result)
         expect(result._id).toBe('5a422aa71b54a676234d17f9')
         expect(result).toEqual(testBlogList[1])
     })

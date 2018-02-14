@@ -1,6 +1,5 @@
 const logger = (request, response, next) => {
     if (process.env.NODE_ENV === 'test') {
-        console.log("TEST TEST")
         return next()
     }
     console.log('Method:', request.method)
