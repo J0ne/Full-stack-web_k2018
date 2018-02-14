@@ -9,7 +9,7 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 -11.2. 1h konfigurointia ja matskun lukemista
 -12.2. 2.5h apin testit
 -13.2. 2h apin testit (POST)
--14.2. 2h  - " -
+-14.2. 3,5h  - " -
 
 
 
