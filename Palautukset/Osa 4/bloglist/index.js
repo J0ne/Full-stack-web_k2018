@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const middleware = require('./utils/middleware')
 const blogsRouter = require('./controllers/blogs')
 const config = require('./utils/config')
+console.log(config)
 mongoose
     .connect(config.mongoUrl)
     .then(() => {

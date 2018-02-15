@@ -5,6 +5,9 @@ const api = supertest(app)
 const { format, initialBlogs, nonExistingId, blogsInDb } = require('./test_helper')
 
 describe('API TESTS', () => {
+    afterAll(() => {
+        server.close()
+    })
     describe('GET API calls ', () => {
         beforeAll(async () => {
             await Blog.remove({})
@@ -111,31 +114,31 @@ describe('API TESTS', () => {
             const blogToUpdate = blogsInDatabase[0]
             blogToUpdate.likes = 666
 
-            const result = api
+            const result = await api
                 .put(`/api/blogs/${blogToUpdate.id}`)
                 .send(blogToUpdate)
                 .expect('Content-Type', /application\/json/)
-            // TODO: Palauttaako PUT - oikein...   
-            expect(result._data.likes).toBe(666)
-        })
-        afterAll(() => {
-            server.close()
-        })
-    })
+            console.log('result',result.body);
+            expect(result.body.likes).toBe(666)
 
-    afterAll(() => {
-        server.close()
+            
+            
+            
+        })
+        // afterAll(() => {
+        //     server.close()
+        // })
     })
 })
 
 
 
-beforeAll(async () => {
-    await Blog.remove({})
+// beforeAll(async () => {
+//     await Blog.remove({})
 
-    let blogObject = new Blog(initialBlogs[0])
-    await blogObject.save()
+//     let blogObject = new Blog(initialBlogs[0])
+//     await blogObject.save()
 
-    blogObject = new Blog(initialBlogs[1])
-    await blogObject.save()
-})
+//     blogObject = new Blog(initialBlogs[1])
+//     await blogObject.save()
+// })

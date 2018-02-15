@@ -40,6 +40,8 @@ blogsRouter.delete('/:id', async (request, response) => {
 
 })
 blogsRouter.put('/:id', async (request, response) => {
+
+    console.log("PUT - suoritus alkaa...")
     const body = request.body
 
     const blog = {
@@ -48,12 +50,13 @@ blogsRouter.put('/:id', async (request, response) => {
         url: body.url,
         likes: body.likes
     }
+    console.log("TRY")
     try {
         const result = await Blog
             .findByIdAndUpdate(request.params.id, blog, { new: true })
-        console.log("BODY", response)
         response.json(formatBlog(result))
     } catch (error) {
+        console.log("CATCH", error)
         response.status(400).send({ error: 'malformatted id' })
     }
     
