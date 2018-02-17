@@ -30,11 +30,27 @@ describe('favorite blog', () =>{
             __v: 0
         },
         {
+            _id: 'xxx2aa71b54a676234d17f8',
+            title: 'Test test test',
+            author: 'Edsger W. Dijkstra',
+            url: 'http://www.example.com',
+            likes: 6,
+            __v: 0
+        },
+        {
             _id: '5a422aa71b54a676234d17f9',
             title: 'Testiblogi',
             author: 'J Mannisto',
             url: 'http://www.example.com',
             likes: 10,
+            __v: 0
+        },
+        {
+            _id: '5a422aa71b54a676234d17xrr',
+            title: 'Testiblogi2',
+            author: 'J Mannisto',
+            url: 'http://www.example.com',
+            likes: 6,
             __v: 0
         },
         {
@@ -51,5 +67,9 @@ describe('favorite blog', () =>{
         const result = listHelper.favoriteBlog(testBlogList)
         expect(result._id).toBe('5a422aa71b54a676234d17f9')
         expect(result).toEqual(testBlogList[1])
+    })
+    test('gives author with most blogs', () => {
+        const result = listHelper.mostBlogs(testBlogList)
+        expect(result.author).toBe('J Mannisto')
     })
 })
