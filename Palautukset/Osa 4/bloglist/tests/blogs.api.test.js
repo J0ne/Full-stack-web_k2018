@@ -118,7 +118,6 @@ describe('API TESTS', () => {
                 .put(`/api/blogs/${blogToUpdate.id}`)
                 .send(blogToUpdate)
                 .expect('Content-Type', /application\/json/)
-            console.log('result',result.body);
             expect(result.body.likes).toBe(666)
 
             

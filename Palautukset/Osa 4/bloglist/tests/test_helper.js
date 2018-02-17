@@ -34,7 +34,6 @@ const nonExistingId = async () => {
     const blog = new Blog()
     await blog.save()
     await blog.remove()
-
     return blog._id.toString()
 }
 
@@ -43,7 +42,6 @@ const blogsInDb = async () => {
     return blogs.map(format)
 }
 const formatUser = (user) => {
-    console.log("TEST - FORMAT", user)
     return {
         id: user._id,
         name: user.name,
@@ -63,7 +61,6 @@ const nonExistingUserId = async () => {
 
 const usersInDb = async () => {
     const users = await User.find({})
-    console.log('users', users)
     return users.map(formatUser)
 }
 
