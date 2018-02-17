@@ -26,7 +26,7 @@ describe('favorite blog', () =>{
             title: 'Go To Statement Considered Harmful',
             author: 'Edsger W. Dijkstra',
             url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-            likes: 5,
+            likes: 7,
             __v: 0
         },
         {
@@ -34,7 +34,7 @@ describe('favorite blog', () =>{
             title: 'Test test test',
             author: 'Edsger W. Dijkstra',
             url: 'http://www.example.com',
-            likes: 6,
+            likes: 8,
             __v: 0
         },
         {
@@ -50,7 +50,7 @@ describe('favorite blog', () =>{
             title: 'Testiblogi2',
             author: 'J Mannisto',
             url: 'http://www.example.com',
-            likes: 6,
+            likes: 2,
             __v: 0
         },
         {
@@ -58,7 +58,7 @@ describe('favorite blog', () =>{
             title: 'Testiblogi2',
             author: 'J Mannisto',
             url: 'http://www.example.com',
-            likes: 8,
+            likes: 1,
             __v: 0
         }
     ]
@@ -71,5 +71,10 @@ describe('favorite blog', () =>{
     test('gives author with most blogs', () => {
         const result = listHelper.mostBlogs(testBlogList)
         expect(result.author).toBe('J Mannisto')
+    })
+    test('gives author with most likes', () => {
+        const result = listHelper.mostLikes(testBlogList)
+        expect(result.author).toBe('Edsger W. Dijkstra')
+        expect(result.likes).toBe(15)
     })
 })

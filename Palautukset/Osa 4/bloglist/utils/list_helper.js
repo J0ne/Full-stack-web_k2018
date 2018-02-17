@@ -41,6 +41,25 @@ const mostBlogs = (blogs) => {
     return last
 }
 
+const mostLikes = (blogs) => {
+    let result = [];
+    let authorsTmp = blogs.map(x => x.author );
+    // new set, without duplicates
+    authorsTmp = Array.from(new Set(authorsTmp));
+    authorsTmp.forEach(author => {
+        result.push({
+            author,
+            likes: totalLikes(blogs.filter(item => item.author == author))
+        })
+    })
+    result.sort(function (a, b) {
+        return a.likes - b.likes;
+    });
+    console.log(result);
+    const last = result[result.length - 1]
+    return last
+}
+
 module.exports = {
-    totalLikes, dummy, favoriteBlog, mostBlogs
+    totalLikes, dummy, favoriteBlog, mostBlogs, mostLikes
 }
