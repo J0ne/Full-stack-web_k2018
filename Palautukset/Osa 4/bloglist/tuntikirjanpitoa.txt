@@ -12,6 +12,8 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 -14.2. 3,5h  - " -
 -15.2. 2h pajassa, testejä kondikseen + users-api
 
+-17.2. 2,5h käyttäjä-asiaa: testit + toteutus
+
 
 
 
