@@ -10,6 +10,7 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 -12.2. 2.5h apin testit
 -13.2. 2h apin testit (POST)
 -14.2. 3,5h  - " -
+-15.2. 2h pajassa, testejä kondikseen + users-api
 
 
 
