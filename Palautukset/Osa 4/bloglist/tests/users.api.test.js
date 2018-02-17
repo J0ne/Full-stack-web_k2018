@@ -38,4 +38,58 @@ describe.only('when there is initially one user at db', async () => {
         expect(usernames).toContain(newUser.username)
         
     })
+
+    test('POST /api/users password at least 3 chars', async () => {
+        const usersBeforeOperation = await usersInDb()
+        console.log('usersBeforeOperation', usersBeforeOperation)
+        const newUser = {
+            username: 'jjmannis',
+            name: 'Jouni Männistö',
+            password: '12',
+            adult: true
+        }
+
+        await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+            .expect('Content-Type', /application\/json/)
+
+    })
+
+    test('POST /api/users username must be unique', async () => {
+        const usersBeforeOperation = await usersInDb()
+        console.log('usersBeforeOperation', usersBeforeOperation)
+        const newUser = {
+            username: 'testuser',
+            name: 'Pitäisi kaatua',
+            password: 'test',
+            adult: true
+        }
+
+        await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+            .expect('Content-Type', /application\/json/)
+
+    })
+    test('POST /api/users adult => true by default', async () => {
+        const usersBeforeOperation = await usersInDb()
+        console.log('usersBeforeOperation', usersBeforeOperation)
+        const newUserWithoutIsAdult = {
+            username: 'jjmannis',
+            name: 'Adult True',
+            password: 'test'
+        }
+
+        const response = await api
+            .post('/api/users')
+            .send(newUserWithoutIsAdult)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+            console.log(response.body)
+            expect(response.body.adult).toBe(true)
+
+    })
 })

@@ -8,21 +8,32 @@ usersRouter.get('/', async (request, response) => {
 })
 
 usersRouter.post('/', async (request, response) => {
+    const body = request.body
+    const password = body.password
+    const username = body.username
+    console.log('password.length', password.length)
+    // password requirements
+    if (password.length < 3) {
+        return response.status(400).json({ error: 'password too short' })
+    }
+    // username validation
+    //const isUnique = await isUniqueUser(username)
+    // parempi tapa
+    const existingUser = await User.find({ username })
+    if (existingUser.length > 0){
+        return response.status(400).json({ error: 'username exists' })
+    }
     try {
-        const body = request.body
-
         const saltRounds = 10
-        const passwordHash = await bcrypt.hash(body.password, saltRounds)
-        console.log(passwordHash)
+        const passwordHash = await bcrypt.hash(password, saltRounds)
         const user = new User({
-            username: body.username,
+            username,
             name: body.name,
             passwordHash,
-            adult: body.adult
+            adult: body.adult === undefined ? true : body.adult
         })
         debugger
         const savedUser = await user.save()
-        console.log(savedUser)
         response.json(savedUser)
     } catch (exception) {
         console.log(exception)
@@ -38,6 +49,12 @@ const formatUser = (user) => {
         adult: user.adult,
         username: user.username
     }
+}
+const isUniqueUser = async (username) => {
+
+    const users = await User.find({})
+    const usernames = users.map(x => x.username)
+    return usernames.indexOf(username) === -1
 }
 
 module.exports = usersRouter
