@@ -9,11 +9,23 @@ const logger = (request, response, next) => {
     next()
 }
 
+const tokenExtractor = (request, response, next) => {
+    console.log("TOKEN EXTRACTOR")
+    const authorization = request.get('authorization')
+    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+        request.token = authorization.substring(7)
+        console.log('TOKEN POIMITTU:', request.token)
+    }
+    
+    next()
+}
+
 const error = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
 }
 
 module.exports = {
     logger,
-    error
+    error,
+    tokenExtractor
 }

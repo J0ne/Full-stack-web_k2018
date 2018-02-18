@@ -1,9 +1,9 @@
 POST http://localhost:3001/api/blogs
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpbcO2dCIsImlkIjoiNWE4OTY5ZmVhYjJmNTY2ZDYxNmFiMWNjIiwiaWF0IjoxNTE4OTU1MDM1fQ.33Cl35UEZBrvyyQVc8jtdAmPTjUDuaT2LJL24xNNOVo
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpbcO2dCIsImlkIjoiNWE4OTY5ZmVhYjJmNTY2ZDYxNmFiMWNjIiwiaWF0IjoxNTE4OTY1NjE4fQ.-i23FcEsfkRg9DicZ40kA-WSHDMVSVVP0xQic86WXfM
 
 {
-  "title": "Testiblogi2",
+  "title": "Testiblogi3",
   "author": "J Mannisto",
   "url": "http://www.example.com",
   "likes": 2
