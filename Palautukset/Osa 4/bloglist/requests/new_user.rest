@@ -2,8 +2,8 @@ POST http://localhost:3001/api/users
 content-type: application/json
 
 {
-  "name": "Jouni Männistö",
-  "username": "jjmannis",
-  "password": "blog123!",
+  "name": "Matti Möttönen",
+  "username": "mattimöt",
+  "password": "masa123!",
   "adult": true
 }

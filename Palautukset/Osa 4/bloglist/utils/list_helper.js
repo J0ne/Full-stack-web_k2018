@@ -13,7 +13,7 @@ const favoriteBlog = (blogs) =>
     const tmpArr = blogs.map(x => { 
         return { id: x._id, likes: x.likes}
     })
-    // console.log('tmpArr', tmpArr)
+
     // sort by value
     tmpArr.sort(function (a, b) {
         return a.likes - b.likes;

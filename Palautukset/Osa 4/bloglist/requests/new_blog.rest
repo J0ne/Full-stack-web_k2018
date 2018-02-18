@@ -1,10 +1,17 @@
 POST http://localhost:3001/api/blogs
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpqbWFubmlzIiwiaWQiOiI1YTg4Nzk4MjQ4MTY0NzRlNjFmNmVjMzgiLCJpYXQiOjE1MTg4OTUzMDl9.AZ3uHnJtZC8441zpob5pNiVyNVUdlnDdpptc527UMA4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpbcO2dCIsImlkIjoiNWE4OTY5ZmVhYjJmNTY2ZDYxNmFiMWNjIiwiaWF0IjoxNTE4OTU1MDM1fQ.33Cl35UEZBrvyyQVc8jtdAmPTjUDuaT2LJL24xNNOVo
 
 {
-  "title": "Sparkfun - START SOMETHING",
-  "author": "Feldi",
-  "url": "https://www.sparkfun.com/news/2597",
-  "likes": 0
+  "title": "Testiblogi2",
+  "author": "J Mannisto",
+  "url": "http://www.example.com",
+  "likes": 2
 }
+
+# {
+#   "title": "Sparkfun - START SOMETHING",
+#   "author": "Feldi",
+#   "url": "https://www.sparkfun.com/news/2597",
+#   "likes": 0
+# }

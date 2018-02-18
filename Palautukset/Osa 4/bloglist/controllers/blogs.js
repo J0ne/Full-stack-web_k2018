@@ -30,11 +30,13 @@ blogsRouter.post('/', async (request, response) => {
         const likes = blog.likes ? blog.likes : 0
         blog.likes = likes
 
-        const user = await User.findById('5a8879824816474e61f6ec38')
+        const userName = decodedToken.username
+        const user = await User.findOne({ username: userName})
+        
         blog.postedBy = user._id
 
         const savedBlog = await blog.save()
-
+        console.log("USER TOKENISTA", user)
         user.blogs = user.blogs.concat(savedBlog._id)
         await user.save()
 
