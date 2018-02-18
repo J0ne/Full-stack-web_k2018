@@ -36,7 +36,6 @@ blogsRouter.post('/', async (request, response) => {
         blog.postedBy = user._id
 
         const savedBlog = await blog.save()
-        console.log("USER TOKENISTA", user)
         user.blogs = user.blogs.concat(savedBlog._id)
         await user.save()
 
@@ -52,12 +51,24 @@ blogsRouter.post('/', async (request, response) => {
 })
 
 blogsRouter.delete('/:id', async (request, response) => {
+    // TODO
+    const token = request.token
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    const userName = decodedToken.username
     try {
+        console.log(request.params.id)
+        const user = await User.findOne({ username: userName })
+        const blog = await Blog.findById(request.params.id)
+        if (blog.postedBy.toString() !== user._id.toString()) {
+            response.status(401).send({ error: 'deletion is not allowed' })
+            return
+        }
         await Blog
             .findByIdAndRemove(request.params.id)
 
         response.status(204).end()
     } catch (error) {
+        console.log(error)
         response.status(400).send({ error: 'malformatted id' })
     }
 

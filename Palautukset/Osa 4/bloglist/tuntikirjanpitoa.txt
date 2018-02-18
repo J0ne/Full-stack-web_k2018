@@ -19,8 +19,12 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 
     jwt-asiaa ym.
     api-testien päivitys: post-kutsuihin tokenit mukaan
--18.2. 2h
+-18.2. 3h
     4.17 blogilistan laajennus, osa 6
 
     4.19 blogilistan laajennus, osa 8
     Tokenin haltija määritellään blogin lisääjäksi.
+    Token header -> request
+
+    4.21* blogilistan laajennus, osa 9
+
