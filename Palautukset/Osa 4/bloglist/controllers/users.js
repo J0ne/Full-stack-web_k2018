@@ -3,8 +3,8 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.get('/', async (request, response) => {
-    const users = await User.find({})
-    response.json(users.map(formatUser))
+    const users = await User.find({}).populate('blogs', { 'title': 1})
+    response.json(users.map(User.format))
 })
 
 usersRouter.post('/', async (request, response) => {
@@ -40,15 +40,15 @@ usersRouter.post('/', async (request, response) => {
     }
 })
 
-const formatUser = (user) => {
-    return {
-        id: user._id,
-        name: user.name,
-        password: user.passwordHash,
-        adult: user.adult,
-        username: user.username
-    }
-}
+// const formatUser = (user) => {
+//     return {
+//         id: user._id,
+//         name: user.name,
+//         password: user.passwordHash,
+//         adult: user.adult,
+//         username: user.username
+//     }
+// }
 const isUniqueUser = async (username) => {
 
     const users = await User.find({})

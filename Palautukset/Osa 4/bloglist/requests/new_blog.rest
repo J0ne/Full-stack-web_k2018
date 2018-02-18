@@ -1,5 +1,6 @@
 POST http://localhost:3001/api/blogs
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpqbWFubmlzIiwiaWQiOiI1YTg4Nzk4MjQ4MTY0NzRlNjFmNmVjMzgiLCJpYXQiOjE1MTg4OTUzMDl9.AZ3uHnJtZC8441zpob5pNiVyNVUdlnDdpptc527UMA4
 
 {
   "title": "Sparkfun - START SOMETHING",

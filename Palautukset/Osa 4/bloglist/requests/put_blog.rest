@@ -5,5 +5,5 @@ content-type: application/json
   "title": "Learn to code",
   "author": "Marius Schultz",
   "url": "https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth",
-  "likes": 123
+  "likes": 125
   }

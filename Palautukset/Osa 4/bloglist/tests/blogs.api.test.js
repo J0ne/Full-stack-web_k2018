@@ -2,7 +2,7 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const Blog = require('../models/blog')
 const api = supertest(app)
-const { format, initialBlogs, nonExistingId, blogsInDb } = require('./test_helper')
+const { initialBlogs, nonExistingId, blogsInDb } = require('./test_helper')
 
 describe('API TESTS', () => {
     afterAll(() => {
@@ -50,7 +50,9 @@ describe('API TESTS', () => {
                 "likes": 100
             }
             await api
-                .post('/api/blogs').send(testBlog)
+                .post('/api/blogs')
+                .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpqbWFubmlzIiwiaWQiOiI1YTg4Nzk4MjQ4MTY0NzRlNjFmNmVjMzgiLCJpYXQiOjE1MTg4OTUzMDl9.AZ3uHnJtZC8441zpob5pNiVyNVUdlnDdpptc527UMA4')
+                .send(testBlog)
                 .expect(201)
                 .expect('Content-Type', /application\/json/)
 
@@ -65,7 +67,9 @@ describe('API TESTS', () => {
                 "url": "https://www.example.com/"
             }
             const result = await api
-                .post('/api/blogs').send(testBlog)
+                .post('/api/blogs')
+                .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpqbWFubmlzIiwiaWQiOiI1YTg4Nzk4MjQ4MTY0NzRlNjFmNmVjMzgiLCJpYXQiOjE1MTg4OTUzMDl9.AZ3uHnJtZC8441zpob5pNiVyNVUdlnDdpptc527UMA4')
+                .send(testBlog)
                 .expect(201)
                 .expect('Content-Type', /application\/json/)
             expect(result.body.likes).toBe(0)
@@ -75,7 +79,9 @@ describe('API TESTS', () => {
                 "author": "API TEST"
             }
             const result = await api
-                .post('/api/blogs').send(testBlog)
+                .post('/api/blogs')
+                .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpqbWFubmlzIiwiaWQiOiI1YTg4Nzk4MjQ4MTY0NzRlNjFmNmVjMzgiLCJpYXQiOjE1MTg4OTUzMDl9.AZ3uHnJtZC8441zpob5pNiVyNVUdlnDdpptc527UMA4')
+                .send(testBlog)
                 .expect(400)
 
             // toinen puuttuu    
@@ -84,7 +90,9 @@ describe('API TESTS', () => {
                 "title": "Test blog"
             }
             const result2 = await api
-                .post('/api/blogs').send(testBlog2)
+                .post('/api/blogs')
+                .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpqbWFubmlzIiwiaWQiOiI1YTg4Nzk4MjQ4MTY0NzRlNjFmNmVjMzgiLCJpYXQiOjE1MTg4OTUzMDl9.AZ3uHnJtZC8441zpob5pNiVyNVUdlnDdpptc527UMA4')
+                .send(testBlog2)
                 .expect(400)
         })
     })

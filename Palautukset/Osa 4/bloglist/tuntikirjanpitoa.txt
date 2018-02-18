@@ -12,10 +12,11 @@ mutta tein sitten ekat tehtävät vielä alusta uudelleen: 3h
 -14.2. 3,5h  - " -
 -15.2. 2h pajassa, testejä kondikseen + users-api
 
--17.2. 5h käyttäjä-asiaa: testit + toteutus
+-17.2. 5,5h käyttäjä-asiaa: testit + toteutus
     mm. nämä:
         4.6* apufunktioita ja yksikkötestejä, osa 4
         4.7* apufunktioita ja yksikkötestejä, osa 5
 
     jwt-asiaa ym.
+    api-testien päivitys: post-kutsuihin tokenit mukaan
 
