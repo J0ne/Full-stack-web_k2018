@@ -1,3 +1,6 @@
 20.2. 0,5h
     osa 5 materiaalin lukua
     alustusta ym.
+
+21.2. 1h
+    5.1 blogilistan frontend, osa 1
