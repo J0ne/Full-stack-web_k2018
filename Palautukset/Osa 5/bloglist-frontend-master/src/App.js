@@ -24,32 +24,63 @@ class App extends React.Component {
     blogService.getAll().then(blogs =>
       this.setState({ blogs })
     )
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      console.log(user)
+      this.setState({ user })
+      // noteService.setToken(user.token)
+    }
   } 
 
-  login = (e) => {
+  login = async (e) => {
     e.preventDefault()
-    const credentials = {
-      username: this.state.username,
-      password: this.state.password
-    }
-    console.log('loginData', credentials)
-    loginService.logIn(credentials).then(response => {
-      console.log(response)
-        this.setState({ user: response.token, username: response.username, token: response.token, name: response.name })
-        console.log(this.state);
-    }).catch(error => {
-      if(error.response.status === 401){
-          alert("Käyttäjätunnus tai salasana väärin")
-      } else{
-          alert("Kirjautuminen ei onnistunut.")
+    try {
+      const credentials = {
+        username: this.state.username,
+        password: this.state.password
       }
-      console.log(error)
-    })
+      console.log('loginData', credentials)
+      loginService.logIn(credentials).then(response => {
+        console.log(response)
+        this.setState({
+          user: { 
+            name: response.name,
+            username: response.username
+            },
+          username: response.username,
+          token: response.token,
+          name: response.name
+        })
+        window.localStorage.setItem('loggedBlogUser', JSON.stringify(response))
+        console.log(this.state);
+      })
+    } catch (error) {
+      if (error.response.status === 401) {
+        alert("Käyttäjätunnus tai salasana väärin")
+      } else {
+        alert("Kirjautuminen ei onnistunut.")
+      }
+      setTimeout(() => {
+        this.setState({ error: null })
+      }, 5000)
+    }
   }
-
+  logOut = () =>{
+    this.setState({
+      username: '',
+      password: '',
+      token: '',
+      user: null})
+    window.localStorage.clear()
+  }
   render() {
     const showLoginStatus = () => (
-      <p><b>{this.state.name}</b> on kirjautunut sisään</p>
+      <div>
+        <p><b>{this.state.user.name}</b> on kirjautunut sisään</p>
+        <button onClick={this.logOut}>Kirjaudu ulos</button>
+      </div>
+     
     )
 
     const loginForm = () => (
