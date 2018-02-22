@@ -4,6 +4,7 @@ import BlogForm from './components/BlogForm'
 // import Login from "./components/Login";
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Notification from './components/Notification'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,8 +14,9 @@ class App extends React.Component {
       username: '',
       password: '',
       token: '',
-      user: null
-
+      user: null,
+      infoText: null,
+      messageType: null
     }
   }
   handleLoginFieldChange = (event) => {
@@ -61,12 +63,22 @@ class App extends React.Component {
         blogService.setToken(response.token)
         window.localStorage.setItem('loggedBlogUser', JSON.stringify(response))
         console.log(this.state);
+        this.showInfo("Kirjautuminen onnistui", 'info')
+      }).catch(error => {
+        if (error.response.status === 401) {
+          this.showInfo("Käyttäjätunnus tai salasana väärin", 'error')
+        } else {
+          this.showInfo("Kirjautuminen ei onnistunut.", 'error')
+        }
+        setTimeout(() => {
+          this.setState({ error: null })
+        }, 5000)
       })
     } catch (error) {
       if (error.response.status === 401) {
-        alert("Käyttäjätunnus tai salasana väärin")
+        this.showInfo("Käyttäjätunnus tai salasana väärin", 'error')
       } else {
-        alert("Kirjautuminen ei onnistunut.")
+        this.showInfo("Kirjautuminen ei onnistunut.", 'error')
       }
       setTimeout(() => {
         this.setState({ error: null })
@@ -81,6 +93,16 @@ class App extends React.Component {
       user: null})
     window.localStorage.clear()
   }
+  showInfo = (message, type) => {
+    this.setState({
+      infoText: message,
+      messageType: type
+    })
+    setTimeout(() => {
+      this.setState({ infoText: null, messageType: null })
+    }, 4000)
+  }
+
   render() {
     const showLoginStatus = () => (
       <div>
@@ -122,12 +144,13 @@ class App extends React.Component {
 
     const showBlogForm = () => {
       if(this.state.user !== null ){
-        return <BlogForm refresh={this.getBlogs}  />
+        return <BlogForm refresh={this.getBlogs} showInfo={this.showInfo}/>
       }
     }
 
     return (
       <div>
+        <Notification message={this.state.infoText} type={this.state.messageType} />
         {this.state.user ? showLoginStatus() : loginForm() }
         <br/>
           {showBlogForm()}

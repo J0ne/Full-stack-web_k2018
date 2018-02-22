@@ -16,11 +16,14 @@ class BlogForm extends React.Component {
         blogService.postBlog(newBlog).then(response => {
             console.log(response)
             this.props.refresh()
+            this.props.showInfo(`Blogin "${this.state.title}" tallennus onnistui!`, 'info')
             this.setState({
                 author: '',
                 title: '',
                 url: ''
             })
+        }).catch(err => {
+            this.props.showInfo("Tallennus ei onnistunut! Virhe: " + err, 'error')
         })
     }
 

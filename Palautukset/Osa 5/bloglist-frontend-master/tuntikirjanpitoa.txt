@@ -6,5 +6,5 @@
     5.1 blogilistan frontend, osa 1
     5.2 blogilistan frontend, osa 2
 
-22.2. 2h
+22.2. 2,5h
     5.3 blogilistan frontend, osa 3
