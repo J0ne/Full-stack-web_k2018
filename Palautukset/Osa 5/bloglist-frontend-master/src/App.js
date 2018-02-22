@@ -1,9 +1,9 @@
 import React from 'react'
 import Blog from './components/Blog'
+import BlogForm from './components/BlogForm'
 // import Login from "./components/Login";
 import blogService from './services/blogs'
 import loginService from './services/login'
-const baseUrl = '/api/login'
 
 class App extends React.Component {
   constructor(props) {
@@ -20,14 +20,20 @@ class App extends React.Component {
   handleLoginFieldChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
-  componentDidMount() {
+
+  getBlogs = () =>{
     blogService.getAll().then(blogs =>
       this.setState({ blogs })
     )
+  }
+
+  componentDidMount() {
+    this.getBlogs()
     const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       console.log(user)
+      blogService.setToken(user.token)
       this.setState({ user })
       // noteService.setToken(user.token)
     }
@@ -52,6 +58,7 @@ class App extends React.Component {
           token: response.token,
           name: response.name
         })
+        blogService.setToken(response.token)
         window.localStorage.setItem('loggedBlogUser', JSON.stringify(response))
         console.log(this.state);
       })
@@ -93,6 +100,7 @@ class App extends React.Component {
         <input
               type="text"
               name="username"
+              autoComplete="off"
               value={this.state.username}
               onChange={this.handleLoginFieldChange}
             />
@@ -102,6 +110,7 @@ class App extends React.Component {
         <input
               type="password"
               name="password"
+              autoComplete="off"
               value={this.state.password}
               onChange={this.handleLoginFieldChange}
             />
@@ -111,10 +120,19 @@ class App extends React.Component {
       </div>
     )
 
+    const showBlogForm = () => {
+      if(this.state.user !== null ){
+        return <BlogForm refresh={this.getBlogs}  />
+      }
+    }
+
     return (
       <div>
         {this.state.user ? showLoginStatus() : loginForm() }
+        <br/>
+          {showBlogForm()}
         <h2>blogs</h2>
+        
         {this.state.blogs.map(blog => 
           <Blog key={blog.id} blog={blog}/>
         )}
