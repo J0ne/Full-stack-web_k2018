@@ -1,7 +1,7 @@
 import React from 'react'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
-// import Login from "./components/Login";
+import LoginForm from "./components/LoginForm";
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
@@ -18,9 +18,6 @@ class App extends React.Component {
       infoText: null,
       messageType: null
     }
-  }
-  handleLoginFieldChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
   }
 
   getBlogs = () =>{
@@ -102,45 +99,30 @@ class App extends React.Component {
       this.setState({ infoText: null, messageType: null })
     }, 4000)
   }
-
+  handleLoginFieldChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ [event.target.name]: event.target.value })
+  }
   render() {
-    const showLoginStatus = () => (
-      <div>
-        <p><b>{this.state.user.name}</b> on kirjautunut sisään</p>
-        <button onClick={this.logOut}>Kirjaudu ulos</button>
-      </div>
-     
-    )
+    const showLoginStatus = () => {
+      return (
+        <div>
+          <p><b>{this.state.user.name}</b> on kirjautunut sisään</p>
+           <button onClick={this.logOut}>Kirjaudu ulos</button>
+        </div>
+      )
+    }
 
-    const loginForm = () => (
-      <div>
-        <h2>Kirjaudu</h2>
-
-        <form onSubmit={this.login}>
-          <div>
-            käyttäjätunnus
-        <input
-              type="text"
-              name="username"
-              autoComplete="off"
-              value={this.state.username}
-              onChange={this.handleLoginFieldChange}
-            />
-          </div>
-          <div>
-            salasana
-        <input
-              type="password"
-              name="password"
-              autoComplete="off"
-              value={this.state.password}
-              onChange={this.handleLoginFieldChange}
-            />
-          </div>
-          <button type="submit">kirjaudu</button>
-        </form>
-      </div>
-    )
+    const loginForm = () => {
+      console.log('this.handleLoginFieldChange', this.handleLoginFieldChange)
+      return (
+        <LoginForm
+            onSubmit={this.login}
+            passwordValue={this.state.password}
+            usernameValue={this.state.username}
+          handleLoginFieldChange={this.handleLoginFieldChange}
+          /> )
+    }
 
     const showBlogForm = () => {
       if(this.state.user !== null ){

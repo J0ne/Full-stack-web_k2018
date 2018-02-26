@@ -8,3 +8,14 @@
 
 22.2. 2,5h
     5.3 blogilistan frontend, osa 3
+
+23.2. 45min
+    Mac OSX:n päivityksen jälkeen säätöä: 
+        en saanut käyntiin backendiä
+25.2. 45min jumissa
+    loginForm ei toiminut 
+26.2. 0,5h
+    vika löyty: 
+        App.js:ssä LoginFormin muuttujana oli onChange vaikka piti olla handleLoginFieldChange.
+        Joka sitten itse LoginFormissa vasta sijoitetaan onChangeen tapahtumankäsittelijäksi
+
