@@ -23,7 +23,13 @@ class App extends React.Component {
 
   getBlogs = () =>{
     blogService.getAll().then(blogs =>
-      this.setState({ blogs })
+      {
+        blogs.sort(function (a, b) {
+         return b.likes - a.likes;
+         });
+         this.setState({blogs})
+      }
+     
     )
   }
 
@@ -129,6 +135,7 @@ class App extends React.Component {
           handleLoginFieldChange={this.handleLoginFieldChange}
           /> )
     }
+
 
     const showBlogForm = () => {
       if(this.state.user !== null ){
