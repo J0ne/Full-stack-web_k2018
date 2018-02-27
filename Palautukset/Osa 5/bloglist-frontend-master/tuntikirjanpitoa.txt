@@ -19,7 +19,7 @@
         App.js:ssä LoginFormin muuttujana oli onChange vaikka piti olla handleLoginFieldChange.
         Joka sitten itse LoginFormissa vasta sijoitetaan onChangeen tapahtumankäsittelijäksi
 
-27.2. 1,5h
+27.2. 2,5h
     5.6* blogilistan frontend, osa 6
-    
+    5.7* blogilistan frontend, osa 7
 

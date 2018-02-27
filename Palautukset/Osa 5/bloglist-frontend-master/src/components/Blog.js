@@ -1,5 +1,5 @@
 import React from 'react'
-
+import blogService from '../services/blogs'
 const showUser = (blog) => {
   if(blog.postedBy != null){
     return 'added by ' + blog.postedBy.name;
@@ -14,7 +14,15 @@ class Blog extends React.Component{
       showDetails: false
     }
   }
+  addLike = () => {
+    const blogData = this.state.blog
+    blogData.likes++
+    const response = blogService.addLike(blogData).then(response =>{
+      console.log(response)
+      this.setState({ blog: response })
+    }).catch(err => console.log(err))
 
+  }
   toggleDetails = () => {
     console.log("Toimii")
     console.log(this.state)
@@ -45,7 +53,7 @@ class Blog extends React.Component{
         </div>
         <div style={hide}>
           <p><a href={this.state.blog.url}>{this.state.blog.url}</a></p>
-          {this.state.blog.likes} <button>like</button> <br />
+          {this.state.blog.likes} <button onClick={this.addLike}>like</button> <br />
           {showUser(this.state.blog)}
         </div>
       </div>
