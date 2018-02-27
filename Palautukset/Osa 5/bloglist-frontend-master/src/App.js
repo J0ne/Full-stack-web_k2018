@@ -2,6 +2,7 @@ import React from 'react'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from "./components/LoginForm";
+import Togglable from "./components/Togglable";
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
@@ -103,6 +104,11 @@ class App extends React.Component {
     console.log(event.target.value)
     this.setState({ [event.target.name]: event.target.value })
   }
+
+  toggleVisibility = () =>{
+    this.BlogForm.toggleVisibility()
+  }
+
   render() {
     const showLoginStatus = () => {
       return (
@@ -126,7 +132,11 @@ class App extends React.Component {
 
     const showBlogForm = () => {
       if(this.state.user !== null ){
-        return <BlogForm refresh={this.getBlogs} showInfo={this.showInfo}/>
+        return (
+          <Togglable buttonLabel="new blog" ref={component => this.BlogForm = component}>
+          <BlogForm refresh={this.getBlogs} showInfo={this.showInfo} toggleVisibility={this.toggleVisibility} />
+        </Togglable>)
+       
       }
     }
 

@@ -16,12 +16,20 @@ class BlogForm extends React.Component {
         blogService.postBlog(newBlog).then(response => {
             console.log(response)
             this.props.refresh()
+
             this.props.showInfo(`Blogin "${this.state.title}" tallennus onnistui!`, 'info')
+            
+            
+            
             this.setState({
                 author: '',
                 title: '',
                 url: ''
             })
+            console.log(this.state)
+            setTimeout(() => {
+                this.props.toggleVisibility()
+            }, 400)
         }).catch(err => {
             this.props.showInfo("Tallennus ei onnistunut! Virhe: " + err, 'error')
         })
@@ -43,7 +51,7 @@ class BlogForm extends React.Component {
                             type="text"
                             name="title"
                             autoComplete="off"
-                            // value={this.state.username}
+                            value={this.state.username}
                             onChange={this.handleBlogFieldChange}
                         />
                     </div>
@@ -53,7 +61,7 @@ class BlogForm extends React.Component {
                             type="title"
                             name="author"
                             autoComplete="off"
-                            // value={this.state.password}
+                            value={this.state.password}
                             onChange={this.handleBlogFieldChange}
                         />
                     </div>
@@ -62,7 +70,7 @@ class BlogForm extends React.Component {
                     <input
                             type="title"
                             name="url"
-                            // value={this.state.password}
+                            value={this.state.password}
                             onChange={this.handleBlogFieldChange}
                         />
                     </div>
