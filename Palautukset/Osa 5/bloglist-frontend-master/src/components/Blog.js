@@ -41,17 +41,13 @@ class Blog extends React.Component{
   }
 
   toggleDetails = () => {
-    console.log("Toimii")
-    console.log(this.state)
     this.setState({ showDetails: !this.state.showDetails})
   }
 
   showDeleteButton = (blog) => {
-    console.log('DELETEBTN', blog.postedBy)
-    console.log('PROPS', this.props)
     if (!blog.postedBy || blog.postedBy.username === this.props.username){
       return (
-        <button class="delete-btn" onClick={this.deleteBlog}>delete blog</button> 
+        <button className="delete-btn" onClick={this.deleteBlog}>delete blog</button> 
       )
     }
   }

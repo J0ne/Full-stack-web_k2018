@@ -126,7 +126,6 @@ class App extends React.Component {
     }
 
     const loginForm = () => {
-      console.log('this.handleLoginFieldChange', this.handleLoginFieldChange)
       return (
         <LoginForm
             onSubmit={this.login}
