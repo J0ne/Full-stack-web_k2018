@@ -5,7 +5,6 @@ const showUser = (blog) => {
     return 'added by ' + blog.postedBy.name;
   }
 }
-
 class Blog extends React.Component{
   constructor(props) {
     super(props)
@@ -47,12 +46,22 @@ class Blog extends React.Component{
     this.setState({ showDetails: !this.state.showDetails})
   }
 
+  showDeleteButton = (blog) => {
+    console.log('DELETEBTN', blog.postedBy)
+    console.log('PROPS', this.props)
+    if (!blog.postedBy || blog.postedBy.username === this.props.username){
+      return (
+        <button class="delete-btn" onClick={this.deleteBlog}>delete blog</button> 
+      )
+    }
+  }
+
   render(){
 
     const blogStyle = {
       paddingTop: 5,
-      paddingBottom: 5,
-      paddingLeft: 5,
+      paddingBottom: 20,
+      paddingLeft: 10,
       border: '1px solid black',
       borderWidth: 1,
       marginBottom: 5,
@@ -62,6 +71,7 @@ class Blog extends React.Component{
       cursor: 'pointer',
       fontWeight: 'bolder'
     }
+
     //const show = { display: this.state.showDetails ? 'none' : '' }
     const hide = { display: this.state.showDetails ? '' : 'none' }
     return (
@@ -75,7 +85,7 @@ class Blog extends React.Component{
           {this.state.blog.likes} 
           <button onClick={this.addLike}>like</button> <br />
           {showUser(this.state.blog)}
-          <button onClick={this.deleteBlog}>delete blog</button> 
+          {this.showDeleteButton(this.state.blog)}
         </div>
       
       </div>
