@@ -59,7 +59,8 @@ blogsRouter.delete('/:id', async (request, response) => {
         console.log(request.params.id)
         const user = await User.findOne({ username: userName })
         const blog = await Blog.findById(request.params.id)
-        if (blog.postedBy.toString() !== user._id.toString()) {
+
+        if (blog.postedBy != null && blog.postedBy.toString() !== user._id.toString()) {
             response.status(401).send({ error: 'deletion is not allowed' })
             return
         }
