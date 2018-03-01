@@ -25,5 +25,12 @@
     5.8* blogilistan frontend, osa 8
         sorttaus getBlogs-funktion yhteydessä
     5.9* blogilistan frontend, osa 9
-    
 
+1.3. 2h
+    5.10 blogilistan frontend, osa 10 
+    5.11 blogilistan frontend, osa 11
+    - pajassa
+
+
+Katso lopuksi, jos jää aikaa:
+1: liken kasvatuksen jälkeen postedBy -> undefined

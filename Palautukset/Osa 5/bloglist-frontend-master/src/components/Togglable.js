@@ -30,7 +30,7 @@ class Togglable extends React.Component {
     }
 }
 Togglable.propTypes = {
-    buttonLabel: PropTypes.string.isRequired,
-    buttonStyle: PropTypes.string.isRequired
+    buttonLabel: PropTypes.string.isRequired //,
+    // buttonStyle: PropTypes.string.isRequired
 }
 export default Togglable

@@ -25,7 +25,6 @@ const addLike = async (blogData) => {
     headers: { 'Authorization': token }
   }
   const response = await axios.put(baseUrl + '/'+ blogData.id, blogData, config)
-  console.log(response)
   return response.data
 }
 
