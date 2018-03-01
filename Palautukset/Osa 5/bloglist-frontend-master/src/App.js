@@ -156,7 +156,8 @@ class App extends React.Component {
         <h2>blogs</h2>
         
         {this.state.blogs.map(blog => 
-          <Blog username={this.state.user.username} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog}/>
+          <Blog username={this.state.user !== null ?
+            this.state.user.username: null} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog}/>
         )}
       </div>
     );

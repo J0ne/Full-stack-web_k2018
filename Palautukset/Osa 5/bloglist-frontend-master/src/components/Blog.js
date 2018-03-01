@@ -60,7 +60,7 @@ class Blog extends React.Component{
 
     const blogStyle = {
       paddingTop: 5,
-      paddingBottom: 20,
+      paddingBottom: 25,
       paddingLeft: 10,
       border: '1px solid black',
       borderWidth: 1,
