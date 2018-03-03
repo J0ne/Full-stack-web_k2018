@@ -40,7 +40,7 @@ class App extends React.Component {
       const user = JSON.parse(loggedUserJSON)
       console.log(user)
       blogService.setToken(user.token)
-      this.setState({ user })
+      this.setState({ username: '', password: '', user })
       // noteService.setToken(user.token)
     }
   } 
@@ -164,7 +164,7 @@ class App extends React.Component {
         {this.state.user ? this.state.blogs.map(blog => 
           <Blog handleLike={() => this.addLike(blog)} username={this.state.user !== null ?
             this.state.user.username: null} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog}/>
-         ) : null}
+         ) : <p>Log in to see the blogs</p>}
       </div>
     );
   }

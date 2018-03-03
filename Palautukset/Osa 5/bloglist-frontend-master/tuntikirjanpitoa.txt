@@ -41,9 +41,12 @@
     refaktorointia: siirsin addLike handlerin App.js:ään jotta saisin helpommin mokattua sen
     5.14* blogilistan testit, osa 3 (details näkyy jo heti! :o )
 
-3.3. 0,5 
+3.3. 2h
     edellisten commitit sekä
     muutos tehtäviä 5.15 ja 5.16 varten: vain kirjautuneelle käyttäjälle näytetään blogilista
+    
+    5.15 blogilistan testit, osa 4
+    5.16* blogilistan testit, osa 5
 
 Katso lopuksi, jos jää aikaa:
 1: liken kasvatuksen jälkeen postedBy -> undefined
