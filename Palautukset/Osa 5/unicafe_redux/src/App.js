@@ -59,7 +59,7 @@ const Statistiikka = () => {
         </tbody>
       </table>
 
-      <button onClick={resetStatistics}>nollaa tilasto</button>
+      <button onClick={this.resetStatistics}>nollaa tilasto</button>
     </div >
   )
 }
