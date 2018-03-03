@@ -13,14 +13,7 @@ class Blog extends React.Component{
       showDetails: false
     }
   }
-  addLike = () => {
-    const blogData = this.state.blog
-    blogData.likes++
-    const response = blogService.addLike(blogData).then(response =>{
-      console.log(response)
-      this.setState({ blog: response })
-    }).catch(err => console.log(err))
-  }
+ 
 
   deleteBlog = () => {
     let title = this.state.blog.title;
@@ -72,18 +65,17 @@ class Blog extends React.Component{
     const hide = { display: this.state.showDetails ? '' : 'none' }
     return (
       
-      <div style={blogStyle}>
-        <div>
+      <div className='wrapper' style={blogStyle}>
+        <div className="list-content">
           <span style={titleStyle} onClick={this.toggleDetails}>{this.state.blog.title}</span> {this.state.blog.author}
         </div>
-        <div style={hide}>
+        <div className="details" style={hide}>
           <p><a href={this.state.blog.url}>{this.state.blog.url}</a></p>
           {this.state.blog.likes} 
-          <button onClick={this.addLike}>like</button> <br />
+          <button className="btn-like" onClick={this.props.handleLike}>like</button> <br />
           {showUser(this.state.blog)}
           {this.showDeleteButton(this.state.blog)}
         </div>
-      
       </div>
     )
   }

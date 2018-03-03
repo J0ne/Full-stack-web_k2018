@@ -31,6 +31,19 @@
     5.11 blogilistan frontend, osa 11
     - pajassa
 
+     1h
+     5.12 blogilistan testit, osa 1
+     5.13 blogilistan testit, osa 2  
+     5.14* blogilistan testit, osa 3...
+        - kuinka mockataan komponentin oma funktio
+
+2.3. 1h
+    refaktorointia: siirsin addLike handlerin App.js:ään jotta saisin helpommin mokattua sen
+    5.14* blogilistan testit, osa 3 (details näkyy jo heti! :o )
+
+3.3. 0,5 
+    edellisten commitit sekä
+    muutos tehtäviä 5.15 ja 5.16 varten: vain kirjautuneelle käyttäjälle näytetään blogilista
 
 Katso lopuksi, jos jää aikaa:
 1: liken kasvatuksen jälkeen postedBy -> undefined

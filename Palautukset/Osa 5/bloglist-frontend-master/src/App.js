@@ -114,7 +114,14 @@ class App extends React.Component {
   toggleVisibility = () =>{
     this.BlogForm.toggleVisibility()
   }
-
+  addLike = (blogData) => {
+    //const blogData = this.state.blog
+    blogData.likes++
+    const response = blogService.addLike(blogData).then(response => {
+      console.log(response)
+      this.setState({ blog: response })
+    }).catch(err => console.log(err))
+  }
   render() {
     const showLoginStatus = () => {
       return (
@@ -154,10 +161,10 @@ class App extends React.Component {
           {showBlogForm()}
         <h2>blogs</h2>
         
-        {this.state.blogs.map(blog => 
-          <Blog username={this.state.user !== null ?
+        {this.state.user ? this.state.blogs.map(blog => 
+          <Blog handleLike={() => this.addLike(blog)} username={this.state.user !== null ?
             this.state.user.username: null} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog}/>
-        )}
+         ) : null}
       </div>
     );
   }
