@@ -1,6 +1,12 @@
 import React from 'react'
+import { actionFor } from '../reducers/notificationReducer'
 
 class Notification extends React.Component {
+
+  componentDidMount() {
+    this.props.store.dispatch(actionFor.notificationShowing('Moro'))
+    console.log(this.props.store.getState())
+  }
   render() {
     const style = {
       border: 'solid',
@@ -9,7 +15,7 @@ class Notification extends React.Component {
     }
     return (
       <div style={style}>
-        render here notification...
+        {this.props.store.getState().notification.message}
       </div>
     )
   }

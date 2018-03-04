@@ -4,3 +4,7 @@
     6.1 ESlint
     6.2 paremmat anekdootit, osa 1
 
+    6.3 paremmat anekdootit, osa 2
+     1,5h
+---
+    3h
