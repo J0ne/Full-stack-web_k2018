@@ -1,5 +1,6 @@
-4.3. 1h 
+4.3. 1,5h 
     materiaalin lukemista, osan 6 alustusta 
 
     6.1 ESlint
-    
+    6.2 paremmat anekdootit, osa 1
+
