@@ -7,7 +7,7 @@ class Notification extends React.Component {
     console.log(this.props.store.getState())
   }
   render() {
-    console.log('NOTIF',this.props.store.getState().notification)
+    // console.log('NOTIF',this.props.store.getState().notification)
     const style = {
       border: 'solid',
       padding: 10,

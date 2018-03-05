@@ -10,12 +10,21 @@ class AnecdoteList extends React.Component {
     }, 5000);
   }
   render() {
-    const anecdotes = this.props.store.getState().anecdotes
+
+    const anecdotesToShow =  () => {
+      const { anecdotes, filter } = this.props.store.getState()
+      // console.log('anecdotes', anecdotes)
+      // console.log('filter', filter)
+      if(filter === ''){
+        return anecdotes
+      }
+      return anecdotes.filter(p => p.content.includes(filter))
+    }
       
     return (
       <div>
         <h2>Anecdotes</h2>
-        {anecdotes.sort((a, b) => b.votes - a.votes).map(anecdote =>
+        {anecdotesToShow().sort((a, b) => b.votes - a.votes).map(anecdote =>
           <div key={anecdote.id}>
             <div>
               {anecdote.content}

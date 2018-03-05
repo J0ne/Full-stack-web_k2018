@@ -6,7 +6,7 @@ class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const anecdote = e.target.anecdote.value
-    console.log(anecdote)
+    // console.log(anecdote)
      this.props.store.dispatch(
        actionFor.anecdoteCreation(anecdote)
     )  
