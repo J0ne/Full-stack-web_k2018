@@ -1,6 +1,7 @@
 import React from 'react'
 import { actionFor } from '../reducers/anecdoteReducer'
-
+import { actionForAlerts } from '../reducers/notificationReducer'
+// import { actionFor } from '../reducers/notificationReducer'
 class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
@@ -9,6 +10,10 @@ class AnecdoteForm extends React.Component {
      this.props.store.dispatch(
        actionFor.anecdoteCreation(anecdote)
     )  
+    this.props.store.dispatch(actionForAlerts.showNotification(` ${anecdote} created`))
+    setTimeout(() => {
+      this.props.store.dispatch(actionForAlerts.hideNotification())
+    }, 5000);
     e.target.anecdote.value = ''
   }
    render() {

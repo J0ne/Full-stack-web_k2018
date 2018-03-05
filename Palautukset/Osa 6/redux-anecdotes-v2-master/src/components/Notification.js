@@ -1,17 +1,18 @@
 import React from 'react'
-import { actionFor } from '../reducers/notificationReducer'
+import { actionForAlerts } from '../reducers/notificationReducer'
 
 class Notification extends React.Component {
 
   componentDidMount() {
-    this.props.store.dispatch(actionFor.notificationShowing('Moro'))
     console.log(this.props.store.getState())
   }
   render() {
+    console.log('NOTIF',this.props.store.getState().notification)
     const style = {
       border: 'solid',
       padding: 10,
-      borderWidth: 1
+      borderWidth: 1,
+      display: this.props.store.getState().notification.status
     }
     return (
       <div style={style}>
