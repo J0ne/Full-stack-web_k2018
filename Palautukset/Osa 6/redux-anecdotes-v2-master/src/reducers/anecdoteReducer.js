@@ -33,15 +33,19 @@ const reducer = (store = initialState, action) => {
 
   return store
 }
-export const actionFor =  {
-    anecdoteCreation(content){
+export const anecdoteCreation = (content) => {
     // console.log(content)
     return {
       type: 'CREATE',
       content
     }
+}
+export const voteCreator = (id) => {
+  console.log(id)
+  return {
+    type: 'VOTE',
+    id
   }
 }
-
 
 export default reducer

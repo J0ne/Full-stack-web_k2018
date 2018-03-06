@@ -1,25 +1,34 @@
 import React from 'react'
-import { actionForAlerts } from '../reducers/notificationReducer'
+import { showNotification, hideNotification } from '../reducers/notificationReducer'
+import { connect } from 'react-redux'
 
 class Notification extends React.Component {
-
-  componentDidMount() {
-    console.log(this.props.store.getState())
-  }
+  
   render() {
-    // console.log('NOTIF',this.props.store.getState().notification)
+    console.log('NOTIF',this.props)
+    const {message, status} = this.props
     const style = {
       border: 'solid',
       padding: 10,
       borderWidth: 1,
-      display: this.props.store.getState().notification.status
+      display: status
     }
     return (
       <div style={style}>
-        {this.props.store.getState().notification.message}
+        {message}
       </div>
     )
   }
 }
+const mapStateToProps = (state) => {
+  console.log('notification STATE',state)
+  return {
+    message: state.notification.message,
+    status: state.notification.status
+  }
+}
+export default connect(
+  mapStateToProps,
+  { showNotification, hideNotification}
+)(Notification)
 
-export default Notification

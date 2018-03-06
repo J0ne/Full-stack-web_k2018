@@ -1,20 +1,23 @@
 import React from 'react'
-import { actionForAlerts } from '../reducers/notificationReducer'
+import { showNotification, hideNotification } from '../reducers/notificationReducer'
+import { voteCreator } from '../reducers/anecdoteReducer'
+import { connect } from 'react-redux'
+
 class AnecdoteList extends React.Component {
   handleLike(anecdote) {
 
-    this.props.store.dispatch({ type: 'VOTE', id: anecdote.id })
-    this.props.store.dispatch(actionForAlerts.showNotification(`you voted ${anecdote.content}`))
+    this.props.voteCreator(anecdote.id)
+    this.props.showNotification(`you voted ${anecdote.content}`)
     setTimeout(() => {
-      this.props.store.dispatch(actionForAlerts.hideNotification())
-    }, 5000);
+      this.props.hideNotification()
+    }, 1000);
   }
   render() {
 
     const anecdotesToShow =  () => {
-      const { anecdotes, filter } = this.props.store.getState()
-      // console.log('anecdotes', anecdotes)
-      // console.log('filter', filter)
+      const { anecdotes, filter } = this.props
+      console.log('anecdotes', anecdotes)
+      console.log('filter', filter)
       if(filter === ''){
         return anecdotes
       }
@@ -41,5 +44,16 @@ class AnecdoteList extends React.Component {
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    filter: state.filter
+  }
+}
 
-export default AnecdoteList
+const ConnectedAnecdoteList = connect(
+  mapStateToProps,
+  { showNotification, hideNotification, voteCreator }
+)(AnecdoteList)
+
+export default ConnectedAnecdoteList
