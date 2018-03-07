@@ -20,10 +20,14 @@
     6.7 paremmat anekdootit, osa 6
     6.8 paremmat anekdootit, osa 7
 
-7.3. 0,5h
+7.3. 3,5h
     6.9 paremmat anekdootit, osa 8
-    6.10 anekdootit ja backend, osa 1 0,5h
-    6.11 anekdootit ja backend, osa 2 0,5h
+    6.10 anekdootit ja backend, osa 1
+    6.11 anekdootit ja backend, osa 2
+    6.12 anekdootit ja backend, osa 3
+    6.13 anekdootit ja backend, osa 4
+    6.14 anekdootit ja backend, osa 5
+§   6.15 anekdootit ja backend, osa 6
 
     
 

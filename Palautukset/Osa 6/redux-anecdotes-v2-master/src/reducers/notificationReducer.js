@@ -36,4 +36,20 @@ export const hideNotification = () => {
         }
 }
 
+export const notify = (message, seconds) => {
+    return async (dispatch) => {
+        dispatch({
+            type: 'SHOW',
+            message: message
+        })
+        setTimeout(() => {
+            dispatch({
+                type: 'HIDE',
+                message: null
+            })
+        }, seconds*1000);
+        
+    }
+}
+
 export default notificationReducer
