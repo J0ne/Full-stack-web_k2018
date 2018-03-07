@@ -22,4 +22,8 @@
 
 7.3. 0,5h
     6.9 paremmat anekdootit, osa 8
+    6.10 anekdootit ja backend, osa 1 0,5h
+    6.11 anekdootit ja backend, osa 2 0,5h
+
+    
 

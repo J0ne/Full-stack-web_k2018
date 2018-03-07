@@ -2,12 +2,14 @@ import React from 'react'
 import { showNotification, hideNotification } from '../reducers/notificationReducer'
 import { voteCreator } from '../reducers/anecdoteReducer'
 import { connect } from 'react-redux'
+import anecdoteService from '../services/anecdotes'
 
 class AnecdoteList extends React.Component {
-  handleLike(anecdote) {
+  handleLike = async(anecdote) => {
 
-    this.props.voteCreator(anecdote.id)
-    this.props.showNotification(`you voted ${anecdote.content}`)
+    const updatedAnecdote = await anecdoteService.addVote(anecdote)
+    this.props.voteCreator(updatedAnecdote.id)
+    this.props.showNotification(`you voted ${updatedAnecdote.content}`)
     setTimeout(() => {
       this.props.hideNotification()
     }, 1000);
@@ -34,6 +36,7 @@ class AnecdoteList extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log(state.anecdotes)
   return {
     anecdotesToShow: state.anecdotes.filter(p => p.content.includes(state.filter))
   }
