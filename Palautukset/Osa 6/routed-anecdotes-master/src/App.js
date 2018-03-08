@@ -1,14 +1,28 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
+
+
+const menuStyle = {
+  backgroundColor: '#bcd1f2',
+  color: 'black',
+  borderRadius: 4,
+  height: 'auto',
+  padding: 5
+}
+const active = {
+  backgroundColor: '#eaeff7',
+  fontWeight: 'bolder',
+  color: 'black',
+  borderRadius: 4,
+  height: 'auto',
+  padding: 5
+}
 
 const Menu = () => (
-  <div>    
-    <Link to="/">anecdotes</Link> &nbsp;
-    <Link to="/new">create new</Link> &nbsp;
-    <Link to="/about">about</Link>
-    {/* <a href='#'>anecdotes</a>&nbsp;
-    <a href='#'>create new</a>&nbsp;
-    <a href='#'>about</a>&nbsp; */}
+    < div style = { menuStyle}>    
+    <NavLink  exact activeStyle={active} to="/">anecdotes</NavLink> &nbsp;
+    <NavLink  activeStyle={active} to="/new">create new</NavLink> &nbsp;
+    <NavLink  activeStyle={active} to="/about">about</NavLink>
   </div>
 )
 
@@ -123,16 +137,17 @@ class App extends React.Component {
           id: '2'
         }
       ],
-      notification: ''
+      notification: '',
+      notificationVisible: 'none'
     } 
   }
 
   addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     this.setState({ anecdotes: this.state.anecdotes.concat(anecdote) })
-    this.setState({ notification: `new anecdote ${anecdote.content} created` })
+    this.setState({ notification: `new anecdote ${anecdote.content} created`, notificationVisible: 'block'  })
     setTimeout(() => {
-      this.setState({ notification: '' })
+      this.setState({ notification: '', notificationVisible: 'none' })
     }, 10000);
 
   }
@@ -159,10 +174,18 @@ class App extends React.Component {
    
 
   render() {
+    const notificationStyle = {
+      border: '2px solid green',
+      color: 'green',
+      padding: 5,
+      borderRadius: 4,
+      backgroundColor: 'rgb(200,220, 200)',
+      display: this.state.notificationVisible 
+    }
     return (
       <div>
         <h1>Software anecdotes</h1>
-        <h3>{this.state.notification}</h3>
+        <h3 style={notificationStyle}>{this.state.notification}</h3>
         <Router>
           <div>
           <Menu />
