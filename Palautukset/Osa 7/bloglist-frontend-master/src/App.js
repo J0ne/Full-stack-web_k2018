@@ -3,11 +3,14 @@ import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from "./components/LoginForm";
 import Togglable from "./components/Togglable";
+import UserList from "./components/UserList"
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
 import { notify } from './reducers/notificationReducer'
+import { userInitialization } from './reducers/userReducer'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 
 class App extends React.Component {
   constructor(props) {
@@ -37,6 +40,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getBlogs()
+    this.props.userInitialization()
     const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -147,6 +151,11 @@ class App extends React.Component {
           /> )
     }
 
+    const showUsers = () => {
+      return (
+        <UserList />
+      )
+    }
 
     const showBlogForm = () => {
       if(this.state.user !== null ){
@@ -158,24 +167,38 @@ class App extends React.Component {
       }
     }
 
-    return (
+    const renderBlogs = () => {
+      console.log("RENDER BLOGS")
+      return ( 
       <div>
+        <h2>blogs</h2>
+        {this.state.user ? this.state.blogs.map(blog =>
+            <Blog handleLike={() => this.addLike(blog)} username={this.state.user !== null ?
+              this.state.user.username : null} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog} />
+          ) : <p>Log in to see the blogs</p>}
+        </div>
+        )
+    }
+    return (
+      <Router>
+      <div>
+        {/* {showUsers()} */}
+      
         <Notification store={this.props.store} />
         {this.state.user ? showLoginStatus() : loginForm() }
         <br/>
           {showBlogForm()}
-        <h2>blogs</h2>
+       
+          <Route exact path="/" render={() => renderBlogs()} />
+          <Route path="/users" render={() => <UserList />} />
         
-        {this.state.user ? this.state.blogs.map(blog => 
-          <Blog handleLike={() => this.addLike(blog)} username={this.state.user !== null ?
-            this.state.user.username: null} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog}/>
-         ) : <p>Log in to see the blogs</p>}
       </div>
+      </Router>
     );
   }
 }
 
 export default connect(
   null,
-  { notify }
+  { notify, userInitialization }
 )(App)

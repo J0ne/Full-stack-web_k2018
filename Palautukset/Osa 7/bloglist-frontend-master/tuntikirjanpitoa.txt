@@ -1,3 +1,5 @@
-10.3. 2h
+10.3. 3h
     Osan 7 alustusta
     7.8 redux, osa 1
+
+    7.1 käyttäjien näkymä
