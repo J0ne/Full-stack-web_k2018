@@ -13,14 +13,15 @@ class BlogDetail extends React.Component {
     }
     showBlog(blog){
         if (blog) {
+            console.log(blog)
             return (<div>
                 <h2>{blog != null ? blog.title : ''}</h2>
                 <div className="" >
                     <p><a href={blog.url}>{blog.url}</a></p>
                     <p>{blog.likes} likes</p>
                     <button className="btn-like" onClick={() => this.addlike(blog)}>like</button> <br />
-                    {/* {showUser(this.state.blog)} */}
-                    {/* {this.showDeleteButton(this.state.blog)} */}
+                    
+                    <p>added by {blog.postedBy !== null ? blog.postedBy.name : 'anonymous!'}</p>
                 </div>
             </div>)
         } else {
@@ -41,7 +42,7 @@ class BlogDetail extends React.Component {
     }
 
     render() {
-        const { blog, handleLike } = this.props
+        const { blog } = this.props
         return this.showBlog(blog)
     }
 
