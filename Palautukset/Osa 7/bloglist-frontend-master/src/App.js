@@ -12,6 +12,7 @@ import { notify } from './reducers/notificationReducer'
 import { userInitialization } from './reducers/userReducer'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
+import { debug } from 'util';
 
 class App extends React.Component {
   constructor(props) {
@@ -132,22 +133,30 @@ class App extends React.Component {
     }).catch(err => console.log(err))
     this.props.notify(`${blogData.title} liked! `, 1)
   }
-
-  userById = (id) => {
-    console.log(this.props.users, id)
-    return this.props.users.find(a => a.id === id)
-  }
   
   render() {
+    const userById = (id) => this.props.users.find(a => a.id === id)
+
+    const loginStyle = {
+      float: 'right'
+    }
+    const menuStyle = {
+      border: '2px solid green',
+      padding: 5
+    }
     const showLoginStatus = () => {
       return (
-        <div>
-          <p><b>{this.state.user.name}</b> on kirjautunut sisään</p>
-           <button onClick={this.logOut}>Kirjaudu ulos</button>
-        </div>
+        <span style={loginStyle}><span><b>{this.state.user.name}</b> on kirjautunut sisään  </span><button onClick={this.logOut}>Kirjaudu ulos</button></span>
+         
       )
     }
-
+    const Menu = () => (
+      <div >
+        <NavLink to="/">Blogs</NavLink> &nbsp;
+        <NavLink to="/users">Users</NavLink> &nbsp;
+        <span style={loginStyle}> {this.state.user ? showLoginStatus() : loginForm()}</span>
+      </div>
+    )
     const loginForm = () => {
       return (
         <LoginForm
@@ -187,19 +196,21 @@ class App extends React.Component {
         )
     }
     return (
+      
       <Router>
       <div>
-        {/* {showUsers()} */}
-      
+          <div style={menuStyle} >
+            <Menu /> 
+          
+          </div>
+
         <Notification store={this.props.store} />
-        {this.state.user ? showLoginStatus() : loginForm() }
-        <br/>
-          {showBlogForm()}
+        {showBlogForm()}
        
           <Route exact path="/" render={() => renderBlogs()} />
           <Route exact path="/users" render={() => <UserList />} />
-          <Route exact path="/users/:id" render={({ match }) =>
-            <User user={this.userById(match.params.id)}/>} />
+          <Route exact path="/users/:id" render={ ({ match }) =>
+            <User user={userById(match.params.id)}/>} />
       </div>
       </Router>
     );

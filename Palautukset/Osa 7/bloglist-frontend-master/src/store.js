@@ -8,6 +8,7 @@ const reducer = combineReducers({
     notification: notificationReducer,
     users: userReducer
 })
+console.log("STORE!")
 const store = createStore(
     reducer,
     applyMiddleware(thunk)
