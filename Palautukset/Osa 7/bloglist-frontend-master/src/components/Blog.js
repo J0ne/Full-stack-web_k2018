@@ -1,5 +1,6 @@
 import React from 'react'
 import blogService from '../services/blogs'
+import { NavLink, Link } from 'react-router-dom'
 const showUser = (blog) => {
   if(blog.postedBy != null){
     return 'added by ' + blog.postedBy.name;
@@ -67,7 +68,8 @@ class Blog extends React.Component{
       
       <div className='wrapper' style={blogStyle}>
         <div className="list-content">
-          <span style={titleStyle} onClick={this.toggleDetails}>{this.state.blog.title}</span> {this.state.blog.author}
+          <Link to={`/blogs/${this.state.blog.id}`}> {this.state.blog.title}</Link>
+          {/* <span style={titleStyle} onClick={this.toggleDetails}>{this.state.blog.title}</span> {this.state.blog.author} */}
         </div>
         <div className="details" style={hide}>
           <p><a href={this.state.blog.url}>{this.state.blog.url}</a></p>

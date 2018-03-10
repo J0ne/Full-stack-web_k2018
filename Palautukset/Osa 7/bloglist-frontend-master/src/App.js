@@ -5,6 +5,7 @@ import LoginForm from "./components/LoginForm";
 import Togglable from "./components/Togglable";
 import UserList from "./components/UserList"
 import User from "./components/User"
+import BlogDetail from "./components/BlogDetail"
 import blogService from './services/blogs'
 import userService from './services/users'
 import loginService from './services/login'
@@ -123,28 +124,34 @@ class App extends React.Component {
   toggleVisibility = () =>{
     this.BlogForm.toggleVisibility()
   }
-  addLike = (blogData) => {
-    //const blogData = this.state.blog
-    blogData.likes++
-    const response = blogService.addLike(blogData).then(response => {
-      this.setState({ blog: response })
+  // addLike = (blogData) => {
+  //   // alert(id)
+  //   // const blogData = this.state.blogs.find(b => b.id === id)
+  //   if(!blogData) return
+  //   blogData.likes++
+  //   const response = blogService.addLike(blogData).then(response => {
+  //     this.setState({ blog: response })
       
-      //this.showInfo(`${blogData.title} liked!`, "info")
-    }).catch(err => console.log(err))
-    this.props.notify(`${blogData.title} liked! `, 1)
-  }
+  //     //this.showInfo(`${blogData.title} liked!`, "info")
+  //   }).catch(err => console.log(err))
+  //   this.props.notify(`${blogData.title} liked! `, 1)
+  // }
   
   render() {
     const userById = (id) => {
       if (this.props.users.length === 0){
         return null
-        // const user = userService.getById(id).then()
-        // return user
       }else{
         return this.props.users.find(a => a.id === id)
       }
     }
-
+    const blogById = (id) => {
+      if (this.state.blogs.length === 0) { // toistaiseksi state
+        return null
+      } else {
+        return this.state.blogs.find(a => a.id === id)
+      }
+    }
     const loginStyle = {
       float: 'right'
     }
@@ -196,8 +203,8 @@ class App extends React.Component {
       <div>
         <h2>blogs</h2>
         {this.state.user ? this.state.blogs.map(blog =>
-            <Blog handleLike={() => this.addLike(blog)} username={this.state.user !== null ?
-              this.state.user.username : null} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog} />
+            <Blog username={this.state.user !== null ?
+              this.state.user.username : null} handleClick={() => this.addLike(blog)} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog} />
           ) : <p>Log in to see the blogs</p>}
         </div>
         )
@@ -215,6 +222,8 @@ class App extends React.Component {
         {showBlogForm()}
        
           <Route exact path="/" render={() => renderBlogs()} />
+          <Route exact path="/blogs/:id" render={({ match }) => 
+            <BlogDetail blog={blogById(match.params.id)} />}/>
           <Route exact path="/users" render={() => <UserList />} />
           <Route exact path="/users/:id" render={ ({ match }) =>
             <User user={userById(match.params.id)}/>} />
