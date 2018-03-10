@@ -6,6 +6,7 @@ import Togglable from "./components/Togglable";
 import UserList from "./components/UserList"
 import User from "./components/User"
 import blogService from './services/blogs'
+import userService from './services/users'
 import loginService from './services/login'
 import Notification from './components/Notification'
 import { notify } from './reducers/notificationReducer'
@@ -135,7 +136,17 @@ class App extends React.Component {
   }
   
   render() {
-    const userById = (id) => this.props.users.find(a => a.id === id)
+    const userById = (id) => {
+      console.log('this.props.users',this.props.users)
+      
+      if (this.props.users.length === 0){
+        return null
+        // const user = userService.getById(id).then()
+        // return user
+      }else{
+        return this.props.users.find(a => a.id === id)
+      }
+    }
 
     const loginStyle = {
       float: 'right'

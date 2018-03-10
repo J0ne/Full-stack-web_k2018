@@ -6,6 +6,12 @@ const getAll = () => {
     return request.then(response => response.data)
 }
 
+const getById = async (id) => {
+    const response = await axios.get(baseUrl + '/' + id)
+    return response.data
+}
+
+
 let token = null
 
 
@@ -16,4 +22,4 @@ let token = null
 
 
 
-export default { getAll }
+export default { getAll, getById }

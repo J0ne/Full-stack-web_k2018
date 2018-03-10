@@ -8,9 +8,9 @@ class User extends React.Component{
         const { user } = this.props
         return (
             <div>
-                <h2>{user.name}</h2>
+                <h2>{user != null ? user.name : ''}</h2>
                 <h4>Added blogs</h4>
-                <ul>{user.blogs.map(blog => <li key={blog._id} >{blog.title}</li>)}</ul>
+                <ul>{user != null && user.blogs != undefined ? user.blogs.map(blog => <li key={blog._id} >{blog.title}</li>): ''}</ul>
 
             </div>
         )

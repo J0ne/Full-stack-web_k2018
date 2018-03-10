@@ -4,7 +4,9 @@
 
     7.1 käyttäjien näkymä
     7.2 yksittäisen käyttäjän näkymä, osa 1
-    7.3.ksittäisen käyttäjän näkymä, osa 2: aikaa kului - ei valmista toistaiseksi
+    7.3.ksittäisen käyttäjän näkymä, osa 2
+        aikaa kului - ei valmista toistaiseksi
+        - liian vaikeasti mietin, enkä tajunnut "return null"
     7.5 navigointi
 
  
