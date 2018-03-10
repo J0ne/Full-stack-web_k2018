@@ -3,3 +3,4 @@
     7.8 redux, osa 1
 
     7.1 käyttäjien näkymä
+ 
