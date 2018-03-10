@@ -7,6 +7,8 @@
     7.3.ksittäisen käyttäjän näkymä, osa 2
         aikaa kului - ei valmista toistaiseksi
         - liian vaikeasti mietin, enkä tajunnut "return null"
+    7.4 blogin näkymä
     7.5 navigointi
+
 
  
