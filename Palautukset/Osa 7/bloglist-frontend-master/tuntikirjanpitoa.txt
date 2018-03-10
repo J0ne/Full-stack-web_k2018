@@ -3,4 +3,5 @@
     7.8 redux, osa 1
 
     7.1 käyttäjien näkymä
+    7.2 yksittäisen käyttäjän näkymä, osa 1
  

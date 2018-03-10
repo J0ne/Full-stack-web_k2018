@@ -4,6 +4,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from "./components/LoginForm";
 import Togglable from "./components/Togglable";
 import UserList from "./components/UserList"
+import User from "./components/User"
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
@@ -131,6 +132,12 @@ class App extends React.Component {
     }).catch(err => console.log(err))
     this.props.notify(`${blogData.title} liked! `, 1)
   }
+
+  userById = (id) => {
+    console.log(this.props.users, id)
+    return this.props.users.find(a => a.id === id)
+  }
+  
   render() {
     const showLoginStatus = () => {
       return (
@@ -190,15 +197,21 @@ class App extends React.Component {
           {showBlogForm()}
        
           <Route exact path="/" render={() => renderBlogs()} />
-          <Route path="/users" render={() => <UserList />} />
-        
+          <Route exact path="/users" render={() => <UserList />} />
+          <Route exact path="/users/:id" render={({ match }) =>
+            <User user={this.userById(match.params.id)}/>} />
       </div>
       </Router>
     );
   }
 }
-
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    users: state.users
+  }
+}
 export default connect(
-  null,
+  mapStateToProps,
   { notify, userInitialization }
 )(App)

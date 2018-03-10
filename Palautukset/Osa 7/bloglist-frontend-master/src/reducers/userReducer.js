@@ -21,4 +21,8 @@ export const userInitialization = (data) => {
     }
 }
 
+// export const userById = (data) => {
+
+// }
+
 export default userReducer

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavLink, Link } from 'react-router-dom'
 
 class UserList extends React.Component {
     
@@ -14,7 +15,7 @@ class UserList extends React.Component {
                     <tbody>
                         {this.props.users.map(user =>
                             <tr key={user.id}>
-                                <td>{user.name}</td>
+                                <td>< Link to={`/users/${user.id}`}> {user.name}</Link></td>
                                 <td>{user.blogs.length}</td>
                             </tr>
                         )}
