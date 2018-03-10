@@ -127,7 +127,6 @@ class App extends React.Component {
     //const blogData = this.state.blog
     blogData.likes++
     const response = blogService.addLike(blogData).then(response => {
-      console.log(response)
       this.setState({ blog: response })
       
       //this.showInfo(`${blogData.title} liked!`, "info")
@@ -137,8 +136,6 @@ class App extends React.Component {
   
   render() {
     const userById = (id) => {
-      console.log('this.props.users',this.props.users)
-      
       if (this.props.users.length === 0){
         return null
         // const user = userService.getById(id).then()
@@ -195,7 +192,6 @@ class App extends React.Component {
     }
 
     const renderBlogs = () => {
-      console.log("RENDER BLOGS")
       return ( 
       <div>
         <h2>blogs</h2>
@@ -228,7 +224,6 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     users: state.users
   }
