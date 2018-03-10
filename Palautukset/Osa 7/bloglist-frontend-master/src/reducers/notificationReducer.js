@@ -4,8 +4,8 @@ const initialState = {
 }
 
 const notificationReducer = (state = initialState, action) => {
-    console.log('ACTION', action)
-    console.log('STATE', state)
+    // console.log('ACTION', action)
+    // console.log('STATE', state)
     // const newState = { ...state }
     let newState = null
     switch (action.type) {

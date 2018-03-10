@@ -6,6 +6,8 @@ import Togglable from "./components/Togglable";
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
+import { notify } from './reducers/notificationReducer'
+import { connect } from 'react-redux'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,9 +17,9 @@ class App extends React.Component {
       username: '',
       password: '',
       token: '',
-      user: null,
-      infoText: null,
-      messageType: null
+      user: null
+      // infoText: null,
+      // messageType: null
     }
   }
   getBlogs = () =>{
@@ -120,8 +122,10 @@ class App extends React.Component {
     const response = blogService.addLike(blogData).then(response => {
       console.log(response)
       this.setState({ blog: response })
-      this.showInfo(`${blogData.title} liked!`, "info")
+      
+      //this.showInfo(`${blogData.title} liked!`, "info")
     }).catch(err => console.log(err))
+    this.props.notify(`${blogData.title} liked! `, 1)
   }
   render() {
     const showLoginStatus = () => {
@@ -156,7 +160,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <Notification message={this.state.infoText} type={this.state.messageType} />
+        <Notification store={this.props.store} />
         {this.state.user ? showLoginStatus() : loginForm() }
         <br/>
           {showBlogForm()}
@@ -171,4 +175,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { notify }
+)(App)

@@ -1,2 +1,3 @@
-10.3. 1h
-Osan 7 alustusta
+10.3. 2h
+    Osan 7 alustusta
+    7.8 redux, osa 1
