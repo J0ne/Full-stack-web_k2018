@@ -1,6 +1,7 @@
 import React from 'react'
 import blogService from '../services/blogs'
 import { NavLink, Link } from 'react-router-dom'
+import { Table } from 'semantic-ui-react'
 const showUser = (blog) => {
   if(blog.postedBy != null){
     return 'added by ' + blog.postedBy.name;
@@ -68,20 +69,14 @@ class Blog extends React.Component{
     //const show = { display: this.state.showDetails ? 'none' : '' }
     const hide = { display: this.state.showDetails ? '' : 'none' }
     return (
-      
-      <div className='wrapper' style={blogStyle}>
-        <div className="list-content">
-          <Link to={`/blogs/${this.state.blog.id}`}> {this.state.blog.title}</Link><span style={floatRight}>({this.state.blog.comments.length } comments)</span>
-          {/* <span style={titleStyle} onClick={this.toggleDetails}>{this.state.blog.title}</span> {this.state.blog.author} */}
-        </div>
-        <div className="details" style={hide}>
-          <p><a href={this.state.blog.url}>{this.state.blog.url}</a></p>
-          {this.state.blog.likes} 
-          <button className="btn-like" onClick={this.props.handleLike}>like</button> <br />
-          {showUser(this.state.blog)}
-          {this.showDeleteButton(this.state.blog)}
-        </div>
-      </div>
+      <Table.Row>
+        <Table.Cell>
+      <Link to={`/blogs/${this.state.blog.id}`}> {this.state.blog.title}</Link>
+        </Table.Cell>
+        <Table.Cell>
+       <span style={floatRight}>({this.state.blog.comments.length} comments)</span>
+       </Table.Cell >
+        </Table.Row>
     )
   }
 } 

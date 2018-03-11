@@ -15,6 +15,8 @@ import { userInitialization } from './reducers/userReducer'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import { debug } from 'util';
+import { Container, Table } from 'semantic-ui-react'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -202,15 +204,22 @@ class App extends React.Component {
       return ( 
       <div>
         <h2>blogs</h2>
-        {this.state.user ? this.state.blogs.map(blog =>
-            <Blog username={this.state.user !== null ?
-              this.state.user.username : null} handleClick={() => this.addLike(blog)} refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog} />
-          ) : <p>Log in to see the blogs</p>}
+          <Table striped celled>
+            <Table.Body>
+              {this.state.user ? this.state.blogs.map(blog =>
+                 <Blog username={this.state.user !== null ?
+                 this.state.user.username : null} handleClick={() => this.addLike(blog)} 
+                 refresh={this.getBlogs} showInfo={this.showInfo} key={blog.id} blog={blog} />
+              ) : <Table.Row>
+                  <Table.Cell>Log in to see the blogs</Table.Cell>
+              </Table.Row>}
+              </Table.Body>
+          </Table>
         </div>
         )
     }
     return (
-      
+      <Container>
       <Router>
       <div>
           <div style={menuStyle} >
@@ -229,6 +238,7 @@ class App extends React.Component {
             <User user={userById(match.params.id)}/>} />
       </div>
       </Router>
+      </Container>
     );
   }
 }
