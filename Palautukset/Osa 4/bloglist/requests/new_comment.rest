@@ -1,0 +1,7 @@
+POST http://localhost:3003/api/blogs/5a896ab6252ef96d807f213d/comments
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpbcO2dCIsImlkIjoiNWE4OTY5ZmVhYjJmNTY2ZDYxNmFiMWNjIiwiaWF0IjoxNTE4OTY1NjE4fQ.-i23FcEsfkRg9DicZ40kA-WSHDMVSVVP0xQic86WXfM
+
+{
+  "message": "Lorem ipsum"
+}

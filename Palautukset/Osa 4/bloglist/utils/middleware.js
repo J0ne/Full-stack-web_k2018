@@ -10,7 +10,7 @@ const logger = (request, response, next) => {
 }
 
 const tokenExtractor = (request, response, next) => {
-    console.log("TOKEN EXTRACTOR")
+    console.log("TOKEN EXTRACTOR", request.params)
     const authorization = request.get('authorization')
     if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
         request.token = authorization.substring(7)

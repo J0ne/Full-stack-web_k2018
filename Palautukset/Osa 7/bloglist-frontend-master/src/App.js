@@ -223,7 +223,7 @@ class App extends React.Component {
        
           <Route exact path="/" render={() => renderBlogs()} />
           <Route exact path="/blogs/:id" render={({ match }) => 
-            <BlogDetail blog={blogById(match.params.id)} />}/>
+            <BlogDetail id={match.params.id} blog={blogById(match.params.id)} />}/>
           <Route exact path="/users" render={() => <UserList />} />
           <Route exact path="/users/:id" render={ ({ match }) =>
             <User user={userById(match.params.id)}/>} />

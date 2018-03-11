@@ -2,13 +2,26 @@
 const blogsRouter = require('express').Router()
 const User = require('../models/user')
 const Blog = require('../models/blog')
+const Comment = require('../models/comment')
 const jwt = require('jsonwebtoken')
 
 blogsRouter.get('/', async (request, response) => {
     const blogs = await Blog.find({}).populate('postedBy', {'username': 1, 'name': 1})
+    .populate('comments',{'message': 1})
     response.json(blogs.map(Blog.format))
 })
-
+blogsRouter.post('/:id/comments', async (request, response) => {
+    console.log('request.params:',request.params)
+    const comment = new Comment(request.body)
+    if(comment.message.length == 0){
+        return response.status(400).json({ error: 'message missing' }).end()
+    }
+    const savedComment = await comment.save()
+    const blog = await Blog.findById(request.params.id)
+    blog.comments = [...blog.comments, savedComment]
+    await blog.save()
+    response.status(201).json(savedComment)
+})
 blogsRouter.get('/:id', async (request, response) => {
     const blog = await Blog.findById(request.params.id)
     response.json(Blog.format(blog))

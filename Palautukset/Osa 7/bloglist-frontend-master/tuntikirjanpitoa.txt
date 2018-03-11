@@ -1,4 +1,4 @@
-10.3. 5h
+10.3. 7h
     Osan 7 alustusta
     7.8 redux, osa 1
 
@@ -9,6 +9,13 @@
         - liian vaikeasti mietin, enkä tajunnut "return null"
     7.4 blogin näkymä
     7.5 navigointi
+
+    7.7 kommentit, osa 2 (kesken) 
+
+11.3. 3h
+  7.6 kommentit, osa 1
+  7.7 kommentit, osa 2 
+
 
 
  

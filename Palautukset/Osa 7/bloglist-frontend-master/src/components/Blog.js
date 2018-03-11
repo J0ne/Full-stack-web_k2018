@@ -61,6 +61,9 @@ class Blog extends React.Component{
       cursor: 'pointer',
       fontWeight: 'bolder'
     }
+    const floatRight = {
+      float: 'right'
+    }
 
     //const show = { display: this.state.showDetails ? 'none' : '' }
     const hide = { display: this.state.showDetails ? '' : 'none' }
@@ -68,7 +71,7 @@ class Blog extends React.Component{
       
       <div className='wrapper' style={blogStyle}>
         <div className="list-content">
-          <Link to={`/blogs/${this.state.blog.id}`}> {this.state.blog.title}</Link>
+          <Link to={`/blogs/${this.state.blog.id}`}> {this.state.blog.title}</Link><span style={floatRight}>({this.state.blog.comments.length } comments)</span>
           {/* <span style={titleStyle} onClick={this.toggleDetails}>{this.state.blog.title}</span> {this.state.blog.author} */}
         </div>
         <div className="details" style={hide}>

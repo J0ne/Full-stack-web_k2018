@@ -6,6 +6,11 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
+const getById = (id) => {
+  const request = axios.get(baseUrl + '/' + id)
+  return request.then(response => response.data)
+}
+
 let token = null
 
 
@@ -35,6 +40,13 @@ const deleteBlog = async (id) => {
   const response = await axios.delete(baseUrl + '/' + id, config)
   return response
 }
+const postComment = async (id, comment) => {
+  const config = {
+    headers: { 'Authorization': token }
+  }
+  const commentData = { message: comment}
+  const response = await axios.post(baseUrl + `/${id}/comments`, commentData, config)
+  return response.data
+}
 
-
-export default { getAll, postBlog, setToken, addLike, deleteBlog}
+export default { getAll, postBlog, setToken, addLike, deleteBlog, getById, postComment}
