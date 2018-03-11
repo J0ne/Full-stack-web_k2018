@@ -1,6 +1,6 @@
 import React from 'react'
 import blogService from '../services/blogs'
-
+import { Button, Form, Input } from 'semantic-ui-react'
 class BlogForm extends React.Component {
     constructor(props) {
         super(props)
@@ -41,47 +41,40 @@ class BlogForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <Form>
                 <h2>Create blog</h2>
-
-                <form>
-                    <div>
+                    <Form.Field>
                         Title:
-                     <input
+                     <Input
                             type="text"
                             name="title"
                             autoComplete="off"
                             value={this.state.username}
                             onChange={this.handleBlogFieldChange}
                         />
-                    </div>
-                    <div>
+                </Form.Field>
+                <Form.Field>
                         Author:
-                    <input
+                    <Input
                             type="title"
                             name="author"
                             autoComplete="off"
                             value={this.state.password}
                             onChange={this.handleBlogFieldChange}
                         />
-                    </div>
-                    <div>
+                </Form.Field>
+                <Form.Field>
                         Url:
-                    <input
+                    <Input
                             type="title"
                             name="url"
                             value={this.state.password}
                             onChange={this.handleBlogFieldChange}
                         />
-                    </div>
-                    <button onClick={this.createBlog}>Create</button>
-                </form>
-            </div>
+                </Form.Field>
+                <Button onClick={this.createBlog}>Create</Button>
+            </Form>
         )
     }
 }
-
-
-
-
 export default BlogForm

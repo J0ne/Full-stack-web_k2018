@@ -1,19 +1,17 @@
 import React from 'react'
+import { Button, Form } from 'semantic-ui-react'
 const CommentForm = ({ onSubmit, commentValue, handleCommentFieldChange }) => {
     return (
-        <div>
-
-            <form onSubmit={onSubmit}>
-                <div>
+            <Form onSubmit={onSubmit}>
+                <Form.Field>
                     <input type="text"
                         name="comment"
                         // autoComplete="off"
                         value={commentValue}
                         onChange={handleCommentFieldChange} />
-                    <button type="submit">send comment</button>
-                </div>
-            </form>
-        </div>
+                    <Button type="submit">send comment</Button>
+                </Form.Field>
+            </Form>
     )
 }
 

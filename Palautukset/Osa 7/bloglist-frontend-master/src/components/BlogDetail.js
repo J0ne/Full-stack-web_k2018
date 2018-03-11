@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import blogService from '../services/blogs'
 import CommentForm from './CommentForm'
 import { notify } from '../reducers/notificationReducer'
+import { Button, Form, Container, Header  } from 'semantic-ui-react'
 // import { userInitialization } from '../reducers/userReducer'
 
 class BlogDetail extends React.Component {
@@ -42,22 +43,20 @@ class BlogDetail extends React.Component {
     }
     showBlog(blog){
         if (blog) {
-            return (<div>
-                <h2>{blog != null ? blog.title : ''}</h2>
-                <div className="" >
+            return (<Container fluid>
+                <Header as='h2'>{blog != null ? blog.title : ''}</Header>
                     <p><a href={blog.url}>{blog.url}</a></p>
                     <p>{blog.likes} likes</p>
-                    <button className="btn-like" onClick={() => this.addlike(blog)}>like</button> <br />
+                    <Button className="btn-like" onClick={() => this.addlike(blog)}>like</Button>
                     
                     <p>added by {blog.postedBy !== null ? blog.postedBy.name : 'anonymous!'}</p>
 
-                    <h3>comments:</h3>
+                    <Header>comments:</Header>
                     <CommentForm onSubmit={this.addComment} commentValue={this.state.comment} handleCommentFieldChange={this.handleInput} />
                     <ul>
                     {blog.comments.map(c => <li key={c._id}>{c.message}</li>)}
                     </ul>
-                </div>
-            </div>)
+            </Container>)
         } else {
             return (<div>...</div>
             )

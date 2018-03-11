@@ -15,7 +15,7 @@ import { userInitialization } from './reducers/userReducer'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import { debug } from 'util';
-import { Container, Table } from 'semantic-ui-react'
+import { Container, Table, Menu, Divider, Label, Button, Grid, Image, Rail, Segment } from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -126,18 +126,6 @@ class App extends React.Component {
   toggleVisibility = () =>{
     this.BlogForm.toggleVisibility()
   }
-  // addLike = (blogData) => {
-  //   // alert(id)
-  //   // const blogData = this.state.blogs.find(b => b.id === id)
-  //   if(!blogData) return
-  //   blogData.likes++
-  //   const response = blogService.addLike(blogData).then(response => {
-  //     this.setState({ blog: response })
-      
-  //     //this.showInfo(`${blogData.title} liked!`, "info")
-  //   }).catch(err => console.log(err))
-  //   this.props.notify(`${blogData.title} liked! `, 1)
-  // }
   
   render() {
     const userById = (id) => {
@@ -163,16 +151,28 @@ class App extends React.Component {
     }
     const showLoginStatus = () => {
       return (
-        <span style={loginStyle}><span><b>{this.state.user.name}</b> on kirjautunut sisään  </span><button onClick={this.logOut}>Kirjaudu ulos</button></span>
-         
+        <div style={loginStyle}>
+          <Label as='a' color='blue' image>
+            {this.state.user.name}
+          </Label>
+          <Button  size='mini' onClick={this.logOut}>Kirjaudu ulos</Button>
+        </div>
       )
     }
-    const Menu = () => (
-      <div >
-        <NavLink to="/">Blogs</NavLink> &nbsp;
-        <NavLink to="/users">Users</NavLink> &nbsp;
-        <span style={loginStyle}> {this.state.user ? showLoginStatus() : loginForm()}</span>
-      </div>
+    const MenuComponent = () => (
+      <Menu >
+        <Menu.Item>
+        <NavLink to="/">Blogs</NavLink>
+        </Menu.Item>
+        <Menu.Item>
+        <NavLink to="/users">Users</NavLink>
+        </Menu.Item>
+        <Menu.Menu position='right'>
+          <Menu.Item>
+            {this.state.user ? showLoginStatus() : ''}
+            </Menu.Item>
+        </Menu.Menu>
+      </Menu>
     )
     const loginForm = () => {
       return (
@@ -202,7 +202,7 @@ class App extends React.Component {
 
     const renderBlogs = () => {
       return ( 
-      <div>
+      <Container>
         <h2>blogs</h2>
           <Table striped celled>
             <Table.Body>
@@ -215,21 +215,23 @@ class App extends React.Component {
               </Table.Row>}
               </Table.Body>
           </Table>
-        </div>
+        </Container>
         )
     }
     return (
-      <Container>
+      <Container> 
+        {/* <span style={loginStyle}> {this.state.user ? showLoginStatus() : ''}</span> */}
       <Router>
       <div>
-          <div style={menuStyle} >
-            <Menu /> 
-          
-          </div>
-
+           
+            <Container >
+              <MenuComponent /> 
+            </Container>
+            {!this.state.user ? loginForm(): ''} 
         <Notification store={this.props.store} />
+            <Divider />
         {showBlogForm()}
-       
+            <Divider />
           <Route exact path="/" render={() => renderBlogs()} />
           <Route exact path="/blogs/:id" render={({ match }) => 
             <BlogDetail id={match.params.id} blog={blogById(match.params.id)} />}/>

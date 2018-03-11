@@ -1,28 +1,29 @@
 import React from 'react'
+import { Button, Form } from 'semantic-ui-react'
 const LoginForm = ({onSubmit, usernameValue, passwordValue, handleLoginFieldChange }) => {
     return (
         <div>
             <h2>Kirjaudu</h2>
-
-            <form onSubmit={onSubmit}>
-                <div>
+        
+            <Form onSubmit={onSubmit}>
+                <Form.Field>
                     käyttäjätunnus
             <input type="text"
                     name="username"
                     // autoComplete="off"
                     value={usernameValue}
                     onChange={handleLoginFieldChange} />
-                </div>
-                <div>
+                </Form.Field>
+                 <Form.Field>
                     salasana
             <input type="password" name="password"
                         // autoComplete="off"
                         value={passwordValue}
                         onChange={handleLoginFieldChange}
                     />
-                </div>
-                <button type="submit">kirjaudu</button>
-            </form>
+                </Form.Field>
+                <Button type="submit">kirjaudu</Button>
+            </Form>
         </div>
     )
 }
